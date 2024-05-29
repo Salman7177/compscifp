@@ -3,3 +3,5 @@ def setup():
     
 def draw():
     background(24)
+    
+    print('hello')
