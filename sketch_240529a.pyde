@@ -5,3 +5,4 @@ def draw():
     background(24)
     
     print('hello')
+    print('goodbye')
