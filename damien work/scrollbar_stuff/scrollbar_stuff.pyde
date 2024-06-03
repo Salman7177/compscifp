@@ -34,5 +34,4 @@ def mouseWheel(event):
 
 def drawScrollbar():
     global posts, scroll_pos
-    
-    max_dist = (len(posts) * 200) + -720
+    # when do y pos, check from the lowest point all the way to the end.
