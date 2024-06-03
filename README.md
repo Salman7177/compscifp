@@ -1,5 +1,4 @@
-# To Do List
+# For shaheer:
 
-- [ ] - Profile Page
-- [ ] - 2
-- [ ] - 3
+- [ ] - Set up own work folder
+- [ ] - Work on profile page
