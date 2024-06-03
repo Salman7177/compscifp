@@ -11,28 +11,45 @@ users = ["Salman", "Damien", "David", "Shaheer"]
 temp_txt = ""
 
 def draw():
-    savePostsToJson()
+    # savePostsToJson()
     
     UserInterface()
 
-def savePostsToJson():
-    global posts, posttxt, users
-    posts = []
+# def savePostsToJson():
+#     global posts, posttxt, users
+#     posts = []
     
-    for i in range(len(posttxt)):
-        post = {
-            "id": i,
-            "user": users[i % len(users)],
-            "post-txt": posttxt[i]
-        }
-        posts.append(post)
+#     for i in range(len(posttxt)):
+#         post = {
+#             "id": i,
+#             "user": users[i % len(users)],
+#             "post-txt": posttxt[i]
+#         }
+#         posts.append(post)
     
-    saveJSONArray(posts, "data/new.json")
+#     saveJSONArray(posts, "data/new.json")
 
 def UserInterface():
+    global temp_txt
+    
     # Text Box
-    rect(300,0,width-300, 150)
-    # Text display
+    fill(255)
+    rect(300, 0, width - 300, 150)
+    
+    # Display typed text
+    fill(0)
+    textSize(15)
+    
+    x = 310
+    y = 20
+    txtw = textWidth(temp_txt)
+    print(txtw)
+    if txtw < 960:
+        text(temp_txt, x, y)
+    elif txt > 960:
+        x = 310
+        y += 20
+    
     
     
 
