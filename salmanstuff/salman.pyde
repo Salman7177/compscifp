@@ -9,6 +9,10 @@ posttxt = ["Hello", "Monkey", "Black", "Grape"]
 users = ["Salman", "Damien", "David", "Shaheer"]
 
 temp_txt = ""
+txt_hold = []
+txtw = textWidth(temp_txt)
+tx = 310
+ty = 20
 
 def draw():
     # savePostsToJson()
@@ -31,6 +35,7 @@ def draw():
 
 def UserInterface():
     global temp_txt
+    global tx, ty
     
     # Text Box
     fill(255)
@@ -40,33 +45,34 @@ def UserInterface():
     fill(0)
     textSize(15)
     
-    x = 310
-    y = 20
-    txtw = textWidth(temp_txt)
     print(txtw)
-    if txtw < 960:
-        text(temp_txt, x, y)
-    elif txt > 960:
-        x = 310
-        y += 20
-    
-    
-    
+    text(temp_txt, 310, ty)
 
-    
 
 def keyPressed():
     global posttxt
     global temp_txt
+    global txt_hold
+    global ty
     
-    if key == BACKSPACE:
+
+        
+    if keyCode == SHIFT:
+        pass
+    elif key == BACKSPACE:
         temp_txt = temp_txt[:-1]
     elif key == ENTER:
-        posttxt.append(temp_txt)
-        print(posttxt)
-
-    elif keyCode == SHIFT:
+        # Combine the hold list into one string the appended it posttxt
         pass
+    elif txtw > 960:
+        txt_hold.append(temp_txt)
+        temp_txt = ""
+        ty += 10
     else:
         temp_txt += key
+        
+    txtw = textWidth(temp_txt)
+# Put all the typed code into a string
+# when the temp text width is bigger then 960 appended it to holding list
+# set the txt y + 20
     
