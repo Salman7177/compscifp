@@ -5,6 +5,7 @@ class UserObject(object):
     
     def test_func(self):
         print(self.username)
+        print(self.password)
         
     # def hash_password():
     #     pass
