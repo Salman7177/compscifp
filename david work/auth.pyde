@@ -1,4 +1,5 @@
 import json
+from user import UserObject
 
 username = []
 password = []
@@ -51,7 +52,15 @@ def keyPressed():
         password.append(key)
         
     if key == ENTER:
-    print('hit enter key')
+        user_str = ''.join(username)
+        pass_str = ''.join(password)
+        
+        print(user_str)
+        print(pass_str)
+        
+        userInfo = UserObject(user_str, pass_str)
+        userInfo.test_func()
+        
         
 def mousePressed():
     global userBoxSelected, passBoxSelected
