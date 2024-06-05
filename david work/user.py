@@ -1,29 +1,22 @@
+import json
+
 class UserObject(object):
     def __init__(self, username, password):
         self.username = username
         self.password = password
     
-    def test_func(self):
-        pass
-    
+    def convert_to_json(self):
+        output = createWriter("data/UserInformation.json")
+        User = {
+                "username": self.username,
+                "password": self.password
+                }
+        jsonified_user = json.dumps(User)
+        print(jsonified_user)
+        output.append(jsonified_user)
+        output.flush()
+        output.close()
     
     def hash_password(self):
-        num = int(self.password)
-        print(num)
-        
-        hashmap = {10:'a', 11:'b', 12:'c', 13:'d', 14:'e', 15:'f'}
-        
-        hex_str = ''
-        if num == 0:
-            return "0"
-        while num > 0:
-            
-            hex_val = num % 16
-            num = num // 16
-            
-            if hex_val >= 10:
-                hex_str = hashmap[hex_val] + hex_str
-            else:
-                hex_str = str(hex_val) + hex_str    
-        print(hex_str)
+        pass
         
