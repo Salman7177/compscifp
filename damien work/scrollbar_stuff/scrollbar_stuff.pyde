@@ -17,6 +17,7 @@ def draw():
     for i in range(len(posts)):
         rect(width/2, (200 * i) + scroll_pos, 300, 200)
     for i in bar:
+        i.scroll_pos = scroll_pos
         i.display()
         
         

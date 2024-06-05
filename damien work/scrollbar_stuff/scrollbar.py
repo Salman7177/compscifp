@@ -15,5 +15,5 @@ class Scrollbar(object):
             if self.bar_size < 20:
                 self.bar_size = 20
         self.y = map(self.scroll_pos, 0, (self.num_posts * -200) + height, 0, height - self.bar_size)
-        rect(1200, self.y, 80, self.bar_size)
+        rect(1250, self.y, 30, self.bar_size, 20)
         
