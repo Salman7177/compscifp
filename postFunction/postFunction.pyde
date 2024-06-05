@@ -1,16 +1,18 @@
 import json
+from post import postFunction
 
-posttxt = ["Hello", "Monkey", "Black", "Grape"]
 users = ["Salman", "Damien", "David", "Shaheer"]
+post_txt = ""
 
 temp_txt = ""
-txt_hold = []
-tx, ty = 310, 20
+hold_txt = []
+ty = 20
 txtw = 0
 
 enter_btn = [1185, 110, 90, 35, False]
 
 grey = [54, 54, 54]
+
 
 def setup():
     size(1280, 720)
@@ -58,7 +60,7 @@ def UserInterface():
     textSize(15)
     
     # Display the held lines
-    for i, line in enumerate(txt_hold):
+    for i, line in enumerate(hold_txt):
         text(line, 310, 20 + i * 20)
     
     # Display the current typing line
@@ -78,23 +80,19 @@ def UserInterface():
     
 
 def keyPressed():
-    global posttxt
-    global temp_txt
-    global txt_hold
-    global ty
-    global txtw
+    global post_txt, temp_txt, hold_txt, ty, txtw
 
     if keyCode == SHIFT:
         pass
     elif key == BACKSPACE:
         if len(temp_txt) > 0:
             temp_txt = temp_txt[:-1]
-        elif len(txt_hold) > 0:
-            temp_txt = txt_hold.pop() + temp_txt
+        elif len(hold_txt) > 0:
+            temp_txt = hold_txt.pop() + temp_txt
             ty -= 20
     elif key == ENTER:
-        if len(txt_hold) < 5:  # Check if less than 5 lines are already present
-            txt_hold.append(temp_txt)
+        if len(hold_txt) < 5:  
+            hold_txt.append(temp_txt)
             temp_txt = ""
             ty += 20
     else:
@@ -102,7 +100,7 @@ def keyPressed():
 
     txtw = textWidth(temp_txt)
     if txtw > 960:
-        txt_hold.append(temp_txt)
+        hold_txt.append(temp_txt)
         temp_txt = ""
         ty += 20
         txtw = 0 
@@ -110,11 +108,29 @@ def keyPressed():
     
     
     
-    
+
 def mousePressed():
-    global txt_hold, posttxt, temp_txt
+    global hold_txt, post_txt, temp_txt
+    
+    print("Hold: " + str(hold_txt))
+    print("Temp: " + str(temp_txt))
+    print("Post: " + str(post_txt))
+
     
     if mouseButton == LEFT and enter_btn[4]:
-        txt_hold.append(temp_txt)
-        posttxt = "".join(txt_hold)  # Join txt_hold into a single string
-        print(str(posttxt))
+        if len(hold_txt) == 0 and temp_txt == "":
+            pass
+        else:
+            hold_txt.append(temp_txt)
+            post_txt = "".join(hold_txt) 
+            temp_txt = ""
+            hold_txt = [] 
+        
+        new_post = postFunction("1" , users[0], post_txt)
+        post_txt = ""
+        new_post.convert_post_to_json()
+        
+# saves line history
+# posts multiples posts
+# add title
+        
