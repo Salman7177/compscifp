@@ -55,10 +55,9 @@ def keyPressed():
         user_str = ''.join(username)
         pass_str = ''.join(password)
         
-        
         userInfo = UserObject(user_str, pass_str)
-        userInfo.test_func()
-        userInfo.hash_password()
+        print(userInfo)
+        userInfo.convert_to_json()
         
         
 def mousePressed():
