@@ -1,1 +1,12 @@
-{"post_txt": "monkey", "id": "1", "username": "Salman"}	
+[
+    {
+        "post_txt": "wadawdawd", 
+        "id": "1", 
+        "username": "Salman"
+    }, 
+    {
+        "post_txt": "wadawd", 
+        "id": "2", 
+        "username": "Damien"
+    }
+]

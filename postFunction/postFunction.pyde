@@ -3,6 +3,7 @@ from post import postFunction
 
 users = ["Salman", "Damien", "David", "Shaheer"]
 post_txt = ""
+posts = []
 
 temp_txt = ""
 hold_txt = []
@@ -110,25 +111,25 @@ def keyPressed():
     
 
 def mousePressed():
-    global hold_txt, post_txt, temp_txt
+    global hold_txt, post_txt, temp_txt, posts
     
     print("Hold: " + str(hold_txt))
     print("Temp: " + str(temp_txt))
     print("Post: " + str(post_txt))
 
-    
     if mouseButton == LEFT and enter_btn[4]:
         if len(hold_txt) == 0 and temp_txt == "":
             pass
         else:
             hold_txt.append(temp_txt)
-            post_txt = "".join(hold_txt) 
+            post_txt = "".join(hold_txt)
             temp_txt = ""
-            hold_txt = [] 
-        
-        new_post = postFunction("1" , users[0], post_txt)
-        post_txt = ""
-        new_post.convert_post_to_json()
+            hold_txt = []
+            new_post = postFunction(str(len(posts) + 1), users[len(posts) % len(users)], post_txt)
+            posts.append(new_post)
+            post_txt = ""
+
+        postFunction(0, "", "").convert_post_to_json(posts)
         
 # saves line history
 # posts multiples posts
