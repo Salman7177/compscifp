@@ -1,4 +1,6 @@
-# For shaheer:
+# TO DO
 
-- [X] - Set up own work folder
-- [X] - Work on profile page (do not worry about posts being included, we'll figure that out once the posts component is done :) )
+- [ ] - Organize user/post JSON data
+- [ ] - How to read back JSON properly
+- [ ] - UI for posts
+- [ ] - Add UI together
