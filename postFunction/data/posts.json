@@ -1,32 +1,8 @@
 [
     {
-        "title": "", 
-        "post_txt": "awdawdawd|awd|awd|awd|", 
+        "title": "asdas", 
+        "post_txt": "asdasdasd|asd|asd|asd|asdas", 
         "id": "1", 
-        "username": "Damien"
-    }, 
-    {
-        "title": "", 
-        "post_txt": "awdawd|awd|awd|awd|", 
-        "id": "2", 
-        "username": "David"
-    }, 
-    {
-        "title": "", 
-        "post_txt": "awdawda|awd|awd|awd|", 
-        "id": "3", 
-        "username": "David"
-    }, 
-    {
-        "title": "", 
-        "post_txt": "awdawd|awd|awd|awd|", 
-        "id": "4", 
         "username": "Salman"
-    }, 
-    {
-        "title": "", 
-        "post_txt": "awd|adw|awd|awd|", 
-        "id": "5", 
-        "username": "Damien"
     }
 ]

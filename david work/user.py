@@ -20,20 +20,6 @@ class UserObject(object):
                 
         file_json.write(str(jsonified_user))
         file_json.close()
-                
-        # else:
-        #     User = {
-        #         "username": self.username,
-        #         "password": self.password
-        #         }
-            
-        #     jsonified_user = json.dumps(User)
-        #     userinfo.wirte(jsonified_user)
-                
-        #     output.append(jsonified_user)
-        #     output.flush()
-        #     output.close()
-            
         
     def hash_password(self):
         pass

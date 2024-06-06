@@ -79,7 +79,10 @@ def UserInterface():
     text(temp_txt, 310, ty+40)
     
     # Enter button
-    fill(grey[0], grey[1], grey[2])
+    if enter_btn[4]:
+        fill(125,0,0)
+    else:
+        fill(grey[0], grey[1], grey[2])
     rect(enter_btn[0], enter_btn[1], enter_btn[2], enter_btn[3])
     
     fill(255)
@@ -123,6 +126,10 @@ def keyPressed():
         temp_txt = ""
         ty += 20
         txtw = 0 
+
+
+
+
 
 def mousePressed():
     global hold_txt, post_txt, temp_txt, posts, title_txt, typing_title, ty
