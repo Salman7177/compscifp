@@ -4,15 +4,20 @@ from post import postFunction
 users = ["Salman", "Damien", "David", "Shaheer"]
 post_txt = ""
 posts = []
-
+title_txt = ""
 temp_txt = ""
 hold_txt = []
-ty = 20
+ty = 70
 txtw = 0
 
-enter_btn = [1185, 110, 90, 35, False]
+enter_btn = [1185, 150, 90, 35, False]
+title_section = [300, 0, 300, 30, False]
+text_section = [300, 40, 980, 150, False]
 
 grey = [54, 54, 54]
+
+typing_title = False
+
 
 
 def setup():
@@ -38,8 +43,8 @@ def mouse_over_button_logic():
     global enter_btn
     
     enter_btn[4] = mouseX > enter_btn[0] and mouseX < enter_btn[0] + enter_btn[2] and mouseY > enter_btn[1] and mouseY < enter_btn[1] + enter_btn[3]
-
-
+    title_section[4] = mouseX > title_section[0] and mouseX < title_section[0] + title_section[2] and mouseY > title_section[1] and mouseY < title_section[1] + title_section[3]
+    text_section[4] = mouseX > text_section[0] and mouseX < text_section[0] + text_section[2] and mouseY > text_section[1] and mouseY < text_section[1] + text_section[3]
     
     
     
@@ -49,23 +54,29 @@ def mouse_over_button_logic():
     
 
 def UserInterface():
-    global temp_txt
-    global tx, ty
+    global temp_txt, title_txt, tx, ty
 
-    # Text Box
+    # Title Text Box
+    fill(230)
+    rect(title_section[0], title_section[1], title_section[2], title_section[3])
+    fill(0)
+    text("Title: ", 305, 15)
+    text(title_txt, 340, 15)
+    
+    # Post Text Box
     fill(255)
-    rect(300, 0, width - 300, 150)
-
+    rect(300, 40, width - 300, 150)
+    
     # Display typed text
     fill(0)
     textSize(15)
     
     # Display the held lines
     for i, line in enumerate(hold_txt):
-        text(line, 310, 20 + i * 20)
+        text(line, 310, 60 + i * 20)
     
     # Display the current typing line
-    text(temp_txt, 310, ty)
+    text(temp_txt, 310, ty+40)
     
     # Enter button
     fill(grey[0], grey[1], grey[2])
@@ -73,31 +84,38 @@ def UserInterface():
     
     fill(255)
     textAlign(CORNER, CENTER)
-    text("Post", 1217, 127)
+    text("Post", 1217, 167)
     textAlign(CORNER, CENTER)
     
     
     
     
-
 def keyPressed():
-    global post_txt, temp_txt, hold_txt, ty, txtw
+    global post_txt, temp_txt, hold_txt, ty, txtw, title_txt
 
     if keyCode == SHIFT:
         pass
     elif key == BACKSPACE:
-        if len(temp_txt) > 0:
-            temp_txt = temp_txt[:-1]
-        elif len(hold_txt) > 0:
-            temp_txt = hold_txt.pop() + temp_txt
-            ty -= 20
+        if typing_title:
+            if len(title_txt) > 0:
+                title_txt = title_txt[:-1]
+        else:
+            if len(temp_txt) > 0:
+                temp_txt = temp_txt[:-1]
+            elif len(hold_txt) > 0:
+                temp_txt = hold_txt.pop() + temp_txt
+                ty -= 20
     elif key == ENTER:
-        if len(hold_txt) < 5:  
+        if len(hold_txt) < 4:
             hold_txt.append(temp_txt)
             temp_txt = ""
             ty += 20
     else:
-        temp_txt += key
+        if typing_title:
+            if textWidth(title_txt + key) <= 500:
+                title_txt += key
+        else:
+            temp_txt += key
 
     txtw = textWidth(temp_txt)
     if txtw > 960:
@@ -106,32 +124,29 @@ def keyPressed():
         ty += 20
         txtw = 0 
 
-    
-    
-    
-
 def mousePressed():
-    global hold_txt, post_txt, temp_txt, posts
+    global hold_txt, post_txt, temp_txt, posts, title_txt, typing_title, ty
     
-    print("Hold: " + str(hold_txt))
-    print("Temp: " + str(temp_txt))
-    print("Post: " + str(post_txt))
+    print(ty)
 
-    if mouseButton == LEFT and enter_btn[4]:
-        if len(hold_txt) == 0 and temp_txt == "":
-            pass
-        else:
-            hold_txt.append(temp_txt)
-            post_txt = "".join(hold_txt)
-            temp_txt = ""
-            hold_txt = []
-            new_post = postFunction(str(len(posts) + 1), users[len(posts) % len(users)], post_txt)
-            posts.append(new_post)
-            post_txt = ""
+    if mouseButton == LEFT:
+        if title_section[4]:
+            typing_title = True
+        elif text_section[4]:
+            typing_title = False
 
-        postFunction(0, "", "").convert_post_to_json(posts)
-        
-# saves line history
-# posts multiples posts
-# add title
-        
+        if enter_btn[4]:
+            if len(hold_txt) == 0 and temp_txt == "" and title_txt == "":
+                pass
+            else:
+                hold_txt.append(temp_txt)
+                post_txt = "|".join(hold_txt)
+                temp_txt = ""
+                hold_txt = []
+                new_post = postFunction(str(len(posts) + 1), users[int(random(0,3))], title_txt, post_txt)
+                posts.append(new_post)
+                post_txt = ""
+                title_txt = ""
+                
+            ty = 20
+            postFunction(0, "", "", "").convert_post_to_json(posts)
