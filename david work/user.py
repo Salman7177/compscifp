@@ -1,20 +1,25 @@
 import json
+
 class UserObject(object):
     def __init__(self, username, password):
         self.username = username
         self.password = password
     
     def convert_to_json(self):
-        output = createWriter("UserInformation.json")
+        # output = createWriter("UserInformation.json")
         
-        with open("UserInformation.json", "a") as userinfohere:
-                User = {
-                        "username": self.username,
-                        "password": self.password
-                        }
-                jsonified_user = json.dumps(User)
-                print(jsonified_user)
-                userinfohere.write(jsonified_user)
+        file_json = open("UserInformation.json", "a")
+            
+        User = {
+                "username": self.username,
+                "password": self.password
+                }
+        jsonified_user = json.dumps(User)
+                
+        print(jsonified_user)
+                
+        file_json.write(str(jsonified_user))
+        file_json.close()
                 
         # else:
         #     User = {
