@@ -6,15 +6,25 @@ class postFunction(object):
         self.username = username
         self.title = title
         self.post_txt = post_txt
+    
+    def convert_post_to_json(self, post):
+        print("h")
+        file_json = open("data/posts.json", "a")
+
+        post_dict = {"id": post.id, "username": post.username, "title": post.title, "post_txt": post.post_txt}
+        print(post)
         
-    def convert_post_to_json(self, all_posts):
-        output = createWriter("data/posts.json")
+        with open("data/posts.json", "a") as file_json:
+            # Convert the post_dict to JSON and write it to the file
+            json.dump(post_dict, file_json, indent=4)
+            file_json.write("\n")
         
-        posts_list = [{"id": post.id, "username": post.username, "title": post.title, "post_txt": post.post_txt} for post in all_posts]
+        # jsonified_posts = json.dumps(posts_list, indent=4)
         
-        jsonified_posts = json.dumps(posts_list, indent=4)
-        print(jsonified_posts)
+        # print(jsonified_posts)
         
-        output.write(jsonified_posts)
-        output.flush()
-        output.close()
+        # file_json.write(str(jsonified_posts))
+        # file_json.flush()
+        # file_json.close()
+        
+        

@@ -3,7 +3,7 @@ from post import postFunction
 
 users = ["Salman", "Damien", "David", "Shaheer"]
 post_txt = ""
-posts = []
+new_post = ""
 title_txt = ""
 temp_txt = ""
 hold_txt = []
@@ -95,7 +95,7 @@ def UserInterface():
     
 def keyPressed():
     global post_txt, temp_txt, hold_txt, ty, txtw, title_txt
-
+    
     if keyCode == SHIFT:
         pass
     elif key == BACKSPACE:
@@ -132,9 +132,8 @@ def keyPressed():
 
 
 def mousePressed():
-    global hold_txt, post_txt, temp_txt, posts, title_txt, typing_title, ty
+    global hold_txt, post_txt, temp_txt, title_txt, typing_title, ty, new_post
     
-    print(ty)
 
     if mouseButton == LEFT:
         if title_section[4]:
@@ -150,10 +149,9 @@ def mousePressed():
                 post_txt = "|".join(hold_txt)
                 temp_txt = ""
                 hold_txt = []
-                new_post = postFunction(str(len(posts) + 1), users[int(random(0,3))], title_txt, post_txt)
-                posts.append(new_post)
+                new_post = postFunction(random(0,1000), users[int(random(0,3))], title_txt, post_txt)
                 post_txt = ""
                 title_txt = ""
                 
             ty = 20
-            postFunction(0, "", "", "").convert_post_to_json(posts)
+            postFunction(0, "", "", "").convert_post_to_json(new_post)
