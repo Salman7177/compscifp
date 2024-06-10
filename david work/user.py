@@ -21,16 +21,10 @@ class UserObject(object):
                 
         file_json.write(str(jsonified_user))
         file_json.close()
-<<<<<<< HEAD
-    
-        print(parsed_json["username"])
                 
-
-            
-
-=======
+        print(parsed_json["username"])        
         
     def hash_password(self):
         pass
->>>>>>> a1da13af0f97a015a4303322230d1052c369b18a
+
         
