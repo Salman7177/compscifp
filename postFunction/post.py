@@ -17,4 +17,7 @@ class postFunction(object):
         with open("data/posts.json", "a") as file_json:
             json.dump(post_dict, file_json, indent=4)
             file_json.write("\n")
-        
+
+
+# The way this is done isn't readable sob emoji sob emoji
+# This needs to be done by putting all the contents in an array, so we have to break everything apart and readd it to an array rather than appending it to the file.
