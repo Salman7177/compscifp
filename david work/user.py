@@ -6,7 +6,6 @@ class UserObject(object):
         self.password = password
     
     def convert_to_json(self):
-        # output = createWriter("UserInformation.json")
         
         file_json = open("UserInformation.json", "a")
             
@@ -14,27 +13,18 @@ class UserObject(object):
                 "username": self.username,
                 "password": self.password
                 }
-        jsonified_user = json.dumps(User)
-                
+        
+        jsonified_user = json.dumps(User, indent=4)
         print(jsonified_user)
+        
+        parsed_json = json.loads(jsonified_user)
                 
         file_json.write(str(jsonified_user))
         file_json.close()
+    
+        print(parsed_json["username"])
                 
-        # else:
-        #     User = {
-        #         "username": self.username,
-        #         "password": self.password
-        #         }
+
             
-        #     jsonified_user = json.dumps(User)
-        #     userinfo.wirte(jsonified_user)
-                
-        #     output.append(jsonified_user)
-        #     output.flush()
-        #     output.close()
-            
-        
-    def hash_password(self):
-        pass
+
         
