@@ -17,6 +17,22 @@ class postFunction(object):
         with open("data/posts.json", "a") as file_json:
             json.dump(post_dict, file_json, indent=4)
             file_json.write("\n")
+    
+    # def convert_post_to_json(self, all_posts):
+    #     output = createWriter("data/posts.json")
+    #     # print(jsonified_posts)
+
+    #     posts_list = [{"id": post.id, "username": post.username, "title": post.title, "post_txt": post.post_txt}]
+    #     # file_json.write(str(jsonified_posts))
+    #     # file_json.flush()
+    #     # file_json.close()
+
+    #     jsonified_posts = json.dumps(posts_list, indent=4)
+    #     print(jsonified_posts)
+
+    #     output.write(jsonified_posts)
+    #     output.flush()
+    #     output.close()
 
 
 # The way this is done isn't readable sob emoji sob emoji
