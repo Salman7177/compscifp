@@ -151,7 +151,7 @@ def mousePressed():
                 post_txt = "|".join(hold_txt)
                 temp_txt = ""
                 hold_txt = []
-                new_post = postFunction(random(0,1000), users[int(random(0,3))], title_txt, post_txt)
+                new_post = postFunction(int(round(random(0,1000),0)), users[int(random(0,3))], title_txt, post_txt)
                 post_txt = ""
                 title_txt = ""
                 
