@@ -1,28 +1,20 @@
-[
-    {
-        "title": "123", 
-        "post_txt": "123123", 
-        "id": 473.81561279296875, 
-        "username": "David"
-    }
-]
-[
-    {
-        "title": "Superman", 
-        "post_txt": "|12312555 sa", 
-        "id": 434.53778076171875, 
-        "username": "Damien"
-    }
-]
+
 {
-    "title": "Super", 
-    "post_txt": "Yes", 
-    "id": 363.73919677734375, 
-    "username": "Damien"
-}
-{
-    "title": "Black Dyde", 
-    "post_txt": "Yasg", 
-    "id": 786.3228759765625, 
-    "username": "Salman"
+    "posts": [
+        {
+            "title": "123", 
+            "post_txt": "123", 
+            "id": 620.39404296875, 
+            "username": "Damien"
+        }
+    ]
+}{
+    "posts": [
+        {
+            "title": "123", 
+            "post_txt": "123123123", 
+            "id": 156.05538940429688, 
+            "username": "Damien"
+        }
+    ]
 }
