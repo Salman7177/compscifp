@@ -4,6 +4,6 @@ f = open('posts.json',)
 
 cru = json.load(f)
 
-for i in cru['lol_data']:
-    for j in i:
-        print(i[j])
+test = ["123123", "lol"]
+
+print(test.append("test"))

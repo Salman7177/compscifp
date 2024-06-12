@@ -14,15 +14,15 @@ class postFunction(object):
         crue = json.load(file_json)
         crue_2nd = crue["posts"]
         print(crue_2nd)
-        new = crue_2nd.append({"monkey": 2})
-        print(new)
+        crue_2nd.append({"monkey": 13})
+        print(crue_2nd)
         
         
-        post_dict = {"posts":[{"id": post.id, "username": post.username, "title": post.title, "post_txt": post.post_txt}]}
+        post_dict = {"posts":crue_2nd}
         print(post)
         
         
-        with open("data/posts.json", "a") as file_json:
+        with open("data/posts.json", "w") as file_json:
             json.dump(post_dict, file_json, ensure_ascii=False, indent=4)
             file_json.write("\n")
     

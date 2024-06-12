@@ -1,14 +1,3 @@
-
-{
-    "posts": [
-        {
-            "title": "123", 
-            "post_txt": "123", 
-            "id": 620.39404296875, 
-            "username": "Damien"
-        }
-    ]
-}
 {
     "posts": [
         {
@@ -16,6 +5,15 @@
             "post_txt": "5756868", 
             "id": 171, 
             "username": "Damien"
+        }, 
+        {
+            "monkey": 2
+        }, 
+        {
+            "monkey": 13
+        }, 
+        {
+            "monkey": 13
         }
     ]
 }
