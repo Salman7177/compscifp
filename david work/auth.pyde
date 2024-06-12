@@ -28,10 +28,29 @@ def draw():
         rect(600, 295, 200, 30)
         fill(0)
         
+        if userBoxSelected:
+            stroke(0, 0, 255)
+            strokeWeight(3)
+            fill(255)
+            rectMode(CENTER)
+            rect(600, 295, 200, 30)
+            fill(0)
+            stroke(0)
+            strokeWeight(1)
+        
         fill(0)
         text("Password: ", 400, 400)
         fill(255)
         rect(600, 395, 200, 30)
+        
+        if passBoxSelected:
+            stroke(0, 0, 255)
+            strokeWeight(3)
+            fill(255)
+            rect(600, 395, 200, 30)
+            stroke(0)
+            strokeWeight(1)
+            
 
         
         xusername = 510
