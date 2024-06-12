@@ -63,9 +63,14 @@ def keyPressed():
         user_str = ''.join(username)
         pass_str = ''.join(password)
         
+        new_psswd = ""
+        for i in pass_str:
+            new_psswd += str(ord(i))
+        print(new_psswd)
+    
         userInfo = UserObject(user_str, pass_str)
-        userInfo.convert_to_json()
-        userInfo.hash_password()
+        userInfo.convert_to_json(new_psswd)
+        # userInfo.hash_password()
         userLoggedIn = True
         
         
