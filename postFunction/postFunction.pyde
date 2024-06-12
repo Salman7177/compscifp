@@ -14,13 +14,14 @@ enter_btn = [1185, 150, 90, 35, False]
 title_section = [300, 0, 300, 30, False]
 text_section = [300, 40, 980, 150, False]
 
-grey = [54, 54, 54]
+grey = color(54,54,54)
 
 typing_title = False
 
-
-
 def setup():
+    
+    users = 
+    
     size(1280, 720)
     global txtw, temp_txt, tx, ty
     txtw = 0
@@ -39,20 +40,12 @@ def draw():
     
     mouse_over_button_logic()
     
-    
-    
 def mouse_over_button_logic():
     global enter_btn
     
     enter_btn[4] = mouseX > enter_btn[0] and mouseX < enter_btn[0] + enter_btn[2] and mouseY > enter_btn[1] and mouseY < enter_btn[1] + enter_btn[3]
     title_section[4] = mouseX > title_section[0] and mouseX < title_section[0] + title_section[2] and mouseY > title_section[1] and mouseY < title_section[1] + title_section[3]
     text_section[4] = mouseX > text_section[0] and mouseX < text_section[0] + text_section[2] and mouseY > text_section[1] and mouseY < text_section[1] + text_section[3]
-    
-    
-    
-    
-    
-    
     
 
 def UserInterface():
@@ -84,16 +77,13 @@ def UserInterface():
     if enter_btn[4]:
         fill(125,0,0)
     else:
-        fill(grey[0], grey[1], grey[2])
+        fill(grey)
     rect(enter_btn[0], enter_btn[1], enter_btn[2], enter_btn[3])
     
     fill(255)
     textAlign(CORNER, CENTER)
     text("Post", 1217, 167)
     textAlign(CORNER, CENTER)
-    
-    
-    
     
 def keyPressed():
     global post_txt, temp_txt, hold_txt, ty, txtw, title_txt
@@ -129,14 +119,9 @@ def keyPressed():
         ty += 20
         txtw = 0 
 
-
-
-
-
 def mousePressed():
     global hold_txt, post_txt, temp_txt, title_txt, typing_title, ty, new_post
     
-
     if mouseButton == LEFT:
         if title_section[4]:
             typing_title = True

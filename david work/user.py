@@ -12,28 +12,22 @@ class UserObject(object):
     #     return new_psswd    
     
     def convert_to_json(self, hashed_psswd):
+        fp = "users-info.json"
+        file_json = open(fp)
+        crue = json.load(file_json)
+        crue_2nd = crue["users"]
         
-
-        file_json = open("UserInformation.json", "a")
-            
-        User = {
-                "username": self.username,
+        crue_2nd.append({
                 "password": hashed_psswd,
-                }
+                "username": self.username,
+                })
         
-        jsonified_user = json.dumps(User, indent=4)
 
+        user_dict = {"users":crue_2nd}        
         
-        parsed_json = json.loads(jsonified_user)
-                
-        file_json.write(str(jsonified_user))
-        file_json.close()
-        
-        
-        
-        print(jsonified_user)    
-                
+        with open(fp, "w") as file_json:
+            json.dump(user_dict, file_json, ensure_ascii=False, indent=4)
+            file_json.write("\n")
+
     
-
-
         

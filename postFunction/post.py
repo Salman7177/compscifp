@@ -14,7 +14,7 @@ class postFunction(object):
         crue = json.load(file_json)
         crue_2nd = crue["posts"]
         print(crue_2nd)
-        crue_2nd.append({"monkey": 13})
+        crue_2nd.append({"id": post.id, "title": post.title, "post_txt": post.post_txt})
         print(crue_2nd)
         
         

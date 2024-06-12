@@ -1,8 +1,8 @@
 import json
 from user import UserObject
 
-username = []
-password = []
+username = ""
+password = ""
 userBoxSelected = False
 passBoxSelected = False
 userLoggedIn = False
@@ -54,21 +54,23 @@ def draw():
 
 def keyPressed():
     global username, password, userLoggedIn
-    if userBoxSelected and len(username) < 8:
-        username.append(key)
+
+    if key == BACKSPACE and userBoxSelected:
+        username = username[:-1]
+    elif key == BACKSPACE and passBoxSelected:
+        password = password[:-1]
+    elif userBoxSelected and len(username) < 8:
+        username += key
     elif passBoxSelected and len(password) < 10:
-        password.append(key)
+        password += key
         
-    if key == ENTER:
-        user_str = ''.join(username)
-        pass_str = ''.join(password)
-        
+    if key == ENTER:        
         new_psswd = ""
         for i in pass_str:
             new_psswd += str(ord(i))
         print(new_psswd)
     
-        userInfo = UserObject(user_str, pass_str)
+        userInfo = UserObject(username, password)
         userInfo.convert_to_json(new_psswd)
         # userInfo.hash_password()
         userLoggedIn = True
