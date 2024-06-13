@@ -3,7 +3,7 @@
 button_nav_home = [0, 0, 250, 100, False]
 button_nav_search = [0, 100, 250, 100, False]
 button_nav_profile = [0, 620, 250, 100, False]
-
+button_edit_bio = [410, 100, 100, 30, False]
 
 # setup script (runs once)
 def setup():
@@ -81,6 +81,16 @@ def draw():
     textSize(20)
     text("bio bio bio bio bio bio boi oib boi obi boi ibo bio bo", 410, 80)
     
+    #edit bio button
+    if button_edit_bio[4]:
+        fill(180)
+    else:
+        fill(220)  
+    rect(button_edit_bio[0], button_edit_bio[1], button_edit_bio[2], button_edit_bio[3])
+    fill(0)
+    text("Edit Bio", 425, 115)
+    
+    
     
     mouse_over_button_logic()
     
@@ -102,6 +112,7 @@ def mouse_over_button_logic():
     button_nav_home[4] = mouseX > button_nav_home[0] and mouseX < button_nav_home[0] + button_nav_home[2] and mouseY > button_nav_home[1] and mouseY < button_nav_home[1] + button_nav_home[3]
     button_nav_search[4] = mouseX > button_nav_search[0] and mouseX < button_nav_search[0] + button_nav_search[2] and mouseY > button_nav_search[1] and mouseY < button_nav_search[1] + button_nav_search[3]
     button_nav_profile[4] = mouseX > button_nav_profile[0] and mouseX < button_nav_profile[0] + button_nav_profile[2] and mouseY > button_nav_profile[1] and mouseY < button_nav_profile[1] + button_nav_profile[3]
+    button_edit_bio[4] = mouseX > button_edit_bio[0] and mouseX < button_edit_bio[0] + button_edit_bio[2] and mouseY > button_edit_bio[1] and mouseY < button_edit_bio[1] + button_edit_bio[3]
 
 
 
