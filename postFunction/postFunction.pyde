@@ -20,8 +20,6 @@ typing_title = False
 
 def setup():
     
-    users = 
-    
     size(1280, 720)
     global txtw, temp_txt, tx, ty
     txtw = 0
@@ -51,6 +49,11 @@ def mouse_over_button_logic():
 def UserInterface():
     global temp_txt, title_txt, tx, ty
 
+    if text_section or title_section:
+        cursor(TEXT)
+    else:
+        cursor(POINT)
+    
     # Title Text Box
     fill(230)
     rect(title_section[0], title_section[1], title_section[2], title_section[3])
