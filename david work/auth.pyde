@@ -107,11 +107,21 @@ def keyPressed():
         
     if key == ENTER and len(username) > 0 and len(password) > 5:        
         new_psswd = ""
-        for i in pass_str:
+        for i in password:
             new_psswd += str(ord(i))
+        
+        raw_json_file = open("user-info.json")
+        json_file = jsons.loads(raw_json_file)
+        
+        for u in json_file["users"]:
+            print(u["username"])
+            
+        
+            
         userInfo = UserObject(username, password)
         userInfo.convert_to_json(new_psswd)
         userLoggedIn = True
+        
     elif key == ENTER and len(username) <= 0:
         usernameError = True
         print("Username must be between 1-8 characters!")

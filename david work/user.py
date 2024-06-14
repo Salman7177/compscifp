@@ -16,8 +16,7 @@ class UserObject(object):
                 "password": hashed_psswd,
                 "username": self.username,
                 })
-        
-
+    
         user_dict = {"users":crue_2nd}        
         
         with open(fp, "w") as file_json:
