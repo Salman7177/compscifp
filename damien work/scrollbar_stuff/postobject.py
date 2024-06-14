@@ -7,6 +7,12 @@ class post_object(object):
         self.contents = contents
     
     def draw_posts(self):
-        rect(width/2, self.y, width/3, 200)
+        fill(255)
+        rect(250, self.y, 1030, 200)
+        fill(0)
+        textSize(24)
+        text(self.title, 270, self.y + 30)
+        textSize(16)
+        text(self.contents, 270, self.y + 60, 950, 150)
         
         
