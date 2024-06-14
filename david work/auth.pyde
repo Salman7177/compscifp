@@ -105,10 +105,11 @@ def keyPressed():
         if key not in banned_keys:
             password += key
         
-    if key == ENTER and len(username) > 0 and len(password) > 5:        
+    if key == ENTER and (len(username) > 0 and len(password) > 5):        
         new_psswd = ""
         for i in password:
             new_psswd += str(ord(i))
+<<<<<<< HEAD
         
         raw_json_file = open("user-info.json")
         json_file = jsons.loads(raw_json_file)
@@ -118,6 +119,9 @@ def keyPressed():
             
         
             
+=======
+        print(new_psswd)
+>>>>>>> 57b3548dbcb39f395df31ec8e5b4f070389103f3
         userInfo = UserObject(username, password)
         userInfo.convert_to_json(new_psswd)
         userLoggedIn = True

@@ -12,7 +12,7 @@ class UserObject(object):
     #     return new_psswd    
     
     def convert_to_json(self, hashed_psswd):
-        fp = "users-info.json"
+        fp = "data/users-info.json"
         file_json = open(fp)
         crue = json.load(file_json)
         crue_2nd = crue["users"]

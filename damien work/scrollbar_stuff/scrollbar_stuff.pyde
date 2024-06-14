@@ -20,8 +20,9 @@ def setup():
         cur_post = post_object(i["id"], i["title"], i["post_txt"])
         posts.append(cur_post)
     
+    print(len(posts))
     max_scroll = (len(posts) * -200) + height # Max scroll should add up all the heights of each individual post box and subtract the height to make sure it ends at the last post.
-    bar.append(Scrollbar(posts, scroll_pos, max_scroll))
+    bar.append(Scrollbar(len(posts), scroll_pos, max_scroll))
 
 #example boxes, for i in bar sets the internal scroll position to the global scroll position and updates its position.
 def draw():
@@ -38,11 +39,13 @@ def draw():
         
 # mousewheel scrolling script, if we ever do multiple scrollbars make sure that the user is selected or hovering over the element they want to scroll over.    
 def mouseWheel(event):
-    global scroll_pos, posts
+    global scroll_pos, posts, max_scroll
     
-    scroll_pos -= event.getCount() * 25
-    if scroll_pos > 0:
-        scroll_pos = 0
-    elif scroll_pos < max_scroll:
-        scroll_pos = max_scroll
+    print(max_scroll)
+    if max_scroll < 0:
+        scroll_pos -= event.getCount() * 25
+        if scroll_pos > 0:
+            scroll_pos = 0
+        elif scroll_pos < max_scroll:
+            scroll_pos = max_scroll
     
