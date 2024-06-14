@@ -11,7 +11,7 @@ class Scrollbar(object):
     # Determines the size it should set itself and displays the bar based on scroll position and number of posts.
     def display(self): 
         fill(255)   
-        if self.num_posts * 200 - height > height:
+        if self.num_posts > 3:
             self.bar_size = height - 180 * log(self.num_posts)
             if self.bar_size < 20:
                 self.bar_size = 20

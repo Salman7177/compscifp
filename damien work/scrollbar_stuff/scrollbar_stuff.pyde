@@ -22,7 +22,7 @@ def setup():
     
     print(len(posts))
     max_scroll = (len(posts) * -200) + height # Max scroll should add up all the heights of each individual post box and subtract the height to make sure it ends at the last post.
-    bar.append(Scrollbar(6, scroll_pos, max_scroll))
+    bar.append(Scrollbar(len(posts), scroll_pos, max_scroll))
 
 #example boxes, for i in bar sets the internal scroll position to the global scroll position and updates its position.
 def draw():
