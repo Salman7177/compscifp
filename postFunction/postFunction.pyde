@@ -37,7 +37,10 @@ def draw():
     textAlign(CORNER, CENTER)
     
     mouse_over_button_logic()
-    
+   
+def signOut():
+    userLoggedIn = False
+
 def mouse_over_button_logic():
     global enter_btn
     

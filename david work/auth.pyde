@@ -105,10 +105,11 @@ def keyPressed():
         if key not in banned_keys:
             password += key
         
-    if key == ENTER and len(username) > 0 and len(password) > 5:        
+    if key == ENTER and (len(username) > 0 and len(password) > 5):        
         new_psswd = ""
-        for i in pass_str:
+        for i in password:
             new_psswd += str(ord(i))
+        print(new_psswd)
         userInfo = UserObject(username, password)
         userInfo.convert_to_json(new_psswd)
         userLoggedIn = True
