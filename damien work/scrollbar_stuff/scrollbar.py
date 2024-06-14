@@ -3,7 +3,7 @@ class Scrollbar(object):
     # Initial variables
     def __init__(self, posts, position, max_pos):
         self.y = 0
-        self.num_posts = len(posts) # Determines how long the bar should be.
+        self.num_posts = posts # Determines how long the bar should be.
         self.bar_size = 0 # The actual bar size
         self.scroll_pos = position # The scroll position from the global value.
         self.max_scroll = max_pos # Highest scroll position value from the global script.
