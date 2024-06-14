@@ -8,13 +8,16 @@ class postFunction(object):
         self.post_txt = post_txt
     
     def convert_post_to_json(self, post):
-        file_json = open("data/posts.json")
+        print("H")
+        fp = "data/posts.json"
+        file_json = open(fp)
         crue = json.load(file_json)
         crue_2nd = crue["posts"]
-        crue_2nd.append({"id": post.id, "title": post.title, "post_txt": post.post_txt})
+        crue_2nd.append({"id": post.id, "user": post.username, "title": post.title, "post_txt": post.post_txt})
+        print(crue_2nd)
         
         post_dict = {"posts":crue_2nd}
     
-        with open("data/posts.json", "w") as file_json:
+        with open(fp, "w") as file_json:
             json.dump(post_dict, file_json, ensure_ascii=False, indent=4)
             file_json.write("\n")
