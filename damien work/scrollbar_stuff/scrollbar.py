@@ -9,7 +9,8 @@ class Scrollbar(object):
         self.max_scroll = max_pos # Highest scroll position value from the global script.
     
     # Determines the size it should set itself and displays the bar based on scroll position and number of posts.
-    def display(self):    
+    def display(self): 
+        fill(255)   
         if self.num_posts * 200 - height > height:
             self.bar_size = height - 180 * log(self.num_posts)
             if self.bar_size < 20:
