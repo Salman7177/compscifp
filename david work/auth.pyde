@@ -7,7 +7,7 @@ userBoxSelected = False
 passBoxSelected = False
 userLoggedIn = False
 
-banned_keys = [" ", ",", ".", ENTER]
+banned_keys = [" ", ",", "."]
 
 usernameError = False
 passwordError = False
@@ -118,6 +118,7 @@ def keyPressed():
     elif key == ENTER and len(password) <= 5:
         passwordError = True
         print("Password must be between 5-10 characters!")
+        print(new_psswd)
         
         
 def mousePressed():
