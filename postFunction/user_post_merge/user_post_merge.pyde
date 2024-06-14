@@ -185,7 +185,7 @@ def userTypingFunction():
         new_psswd = ""
         for i in password:
             new_psswd += str(ord(i))
-        print(new_psswd)
+        print(new_psswd) # asdASd
         userInfo = UserObject(username, password)
         userInfo.convert_to_json(new_psswd)
         userLoggedIn = True
