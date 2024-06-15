@@ -125,7 +125,7 @@ def keyPressed():
             for a in data['users']:
                 if a['username'] == username and unhashed_psswd == a['password']:
                     
-                    print('found EXACT match')
+                    print('found EXACT username and password match')
         
         
         userInfo = UserObject(username, password)
