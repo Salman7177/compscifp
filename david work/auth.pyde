@@ -7,7 +7,7 @@ userBoxSelected = False
 passBoxSelected = False
 userLoggedIn = False
 
-banned_keys = [" ", ",", "."]
+banned_keys = [" ", ",", ".", ENTER]
 
 usernameError = False
 passwordError = False
@@ -106,24 +106,30 @@ def keyPressed():
             password += key
         
     if key == ENTER and (len(username) > 0 and len(password) > 5):        
-        new_psswd = ""
-        for i in password:
-            new_psswd += str(ord(i))
-<<<<<<< HEAD
+        new_psswd = [ord(c) for c in password]
+        json_psswd = ''.join(map(str, new_psswd))
         
-        raw_json_file = open("user-info.json")
-        json_file = jsons.loads(raw_json_file)
-        
-        for u in json_file["users"]:
-            print(u["username"])
-            
-        
-            
-=======
+
         print(new_psswd)
->>>>>>> 57b3548dbcb39f395df31ec8e5b4f070389103f3
+        print(json_psswd)
+        
+        unhashed_psswd = [chr(c) for c in new_psswd]
+        unhashed_psswd = ''.join(unhashed_psswd)
+        
+        print(unhashed_psswd)
+
+
+        with open("users-info.json") as raw_json_file:
+            
+            data = json.load(raw_json_file)
+            for a in data['users']:
+                if a['username'] == username and unhashed_psswd == a['password']:
+                    
+                    print('found EXACT match')
+        
+        
         userInfo = UserObject(username, password)
-        userInfo.convert_to_json(new_psswd)
+        userInfo.convert_to_json(json_psswd)
         userLoggedIn = True
         
     elif key == ENTER and len(username) <= 0:
@@ -133,7 +139,6 @@ def keyPressed():
         passwordError = True
         print("Password must be between 5-10 characters!")
         print(new_psswd)
-        
         
 def mousePressed():
     global userBoxSelected, passBoxSelected

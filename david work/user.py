@@ -5,7 +5,6 @@ class UserObject(object):
         self.username = username
         self.password = password
           
-    
     def convert_to_json(self, hashed_psswd):
         fp = "users-info.json"
         file_json = open(fp)
@@ -22,6 +21,4 @@ class UserObject(object):
         with open(fp, "w") as file_json:
             json.dump(user_dict, file_json, ensure_ascii=False, indent=4)
             file_json.write("\n")
-
-    
-        
+            
