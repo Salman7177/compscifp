@@ -52,8 +52,14 @@ def bioUserInterface():
     image(home_icon, 50, 50, 30, 30)
     
 <<<<<<< HEAD
+<<<<<<< HEAD
     # search btn
     if button_nav_search[4]:
+=======
+    
+    # post btn
+    if button_nav_post[4]:
+>>>>>>> 778e84fd388570faedc4af352f46630e99833a43
 =======
     
     # post btn
