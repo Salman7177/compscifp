@@ -1,6 +1,5 @@
 import json
-
-
+from bio import bioFunction
 
 # create buttons
 button_nav_home = [0, 0, 250, 100, False]
@@ -10,10 +9,9 @@ button_logout = [0, 520, 250, 100, False]
 button_edit_bio = [410, 100, 130, 30, False]
 button_submit_bio = [550, 100, 130, 30, False]
 
-bio = "BIO IBOIBOIOBI OI BOIBO IBOIBOIB OBIoBIBIOIBOoIB oB ib"
+bio = ""
 edit_bio = False
-
-
+username = "Salman"
 
 # setup script (runs once)
 def setup():
@@ -27,18 +25,16 @@ def setup():
 
 # update loop
 def draw():
+    pass
+
+def bioUserInterface():
     background(255)
-    
-    
-    
     
     # draw profile page
     fill(30)
     stroke(125)
     rect(0, 0, 250, height)
     rect(250, 0, 1280 - 250, 150)
-    
-    
     
     #navbar
     # home btn
@@ -54,7 +50,6 @@ def draw():
     home_icon = loadImage("home.png")
     imageMode(CENTER)
     image(home_icon, 50, 50, 30, 30)
-    
     
     # search btn
     if button_nav_search[4]:
@@ -111,8 +106,6 @@ def draw():
     fill(0)
     text("Retype Bio", 425, 115)
     
-    
-    
     if edit_bio:
         if button_edit_bio[4]:
             fill(180)
@@ -122,21 +115,7 @@ def draw():
         fill(0)
         text("Submit", 555, 115)
     
-    
-    
     mouse_over_button_logic()
-    
-    
-    fill(0)
-    text(str(mouseX) + "," + str(mouseY), width / 2, 700)
-
-
-
-
-
-
-
-
 
 def mouse_over_button_logic():
     global button_nav_home, button_nav_search, button_nav_profile
@@ -148,7 +127,9 @@ def mouse_over_button_logic():
     button_submit_bio[4] = mouseX > button_submit_bio[0] and mouseX < button_submit_bio[0] + button_submit_bio[2] and mouseY > button_submit_bio[1] and mouseY < button_submit_bio[1] + button_submit_bio[3]
     button_logout[4] = mouseX > button_logout[0] and mouseX < button_logout[0] + button_logout[2] and mouseY > button_logout[1] and mouseY < button_logout[1] + button_logout[3]
 
-def mousePressed():
+
+
+def bioMouseFunction():
     global edit_bio, bio
     if button_edit_bio[4]:
         edit_bio = True
@@ -156,36 +137,29 @@ def mousePressed():
         
     if button_submit_bio[4]:
         edit_bio = False
-        write_bio_to_json()
+        new_bio = bioFunction(username, bio)
 
+        bioFunction("","").write_bio_to_json(new_bio)
 
+def mousePressed():
+    bioMouseFunction()
 
-# key pressed function, handles keyboard input
-def keyPressed():
+def bioKeyboardFunction():
     global bio, edit_bio
     if edit_bio:
-        if key == BACKSPACE:
+        if keyCode == SHIFT:
+            pass
+        elif key == BACKSPACE:
             bio = bio[:-1]
         else:
             if len(bio) < 50:
                 bio += key
                 
+
+# key pressed function, handles keyboard input
+def keyPressed():
+    bioKeyboardFunction()
                 
-def write_bio_to_json():
-    
-    fp = "data/bio.json"
-    file_json = open(fp)
-    crue = json.load(file_json)
-    crue_2nd = crue["users"]
-       
-    crue_2nd.append({
-        "bio": "hiiiiii"
-        })
-    user_dict = {"users":crue_2nd}        
-    
-    with open(fp, "w") as file_json:
-        json.dump(user_dict, file_json, ensure_ascii=False, indent=4)
-        file_json.write("\n")
     
     
     
