@@ -9,8 +9,8 @@ userLoggedIn = False
 
 banned_keys = [" ", ",", ".", ENTER]
 
-usernameError = False
-passwordError = False
+usernameError = " "
+passwordError = " "
 
 def setup():
     size(1280, 720)
@@ -34,19 +34,18 @@ def draw():
         rect(600, 295, 200, 30)
         fill(0)
         
-        if usernameError:
-            fill(255, 0, 0)
-            textSize(15)
-            text("Username must be between 1-8 characters!", 500, 325)
-            fill(0)
-            textSize(20)
+        fill(255, 0, 0)
+        textSize(15)
+        text(usernameError, 500, 325)
+        fill(0)
+        textSize(20)
         
-        if passwordError:
-            fill(255, 0, 0)
-            textSize(15)
-            text("Password must be between 5-10 characters!", 500, 425)
-            fill(0)
-            textSize(20)
+    
+        fill(255, 0, 0)
+        textSize(15)
+        text(passwordError, 500, 425)
+        fill(0)
+        textSize(20)
         
         if userBoxSelected:
             stroke(0, 0, 255)
@@ -124,8 +123,11 @@ def keyPressed():
             data = json.load(raw_json_file)
             for a in data['users']:
                 if a['username'] == username and unhashed_psswd == a['password']:
-                    
+                     
                     print('found EXACT username and password match')
+                    
+                elif a['username'] == username:
+                    usernameError = 'Username already exists or you entered the wrong password!'
         
         
         userInfo = UserObject(username, password)
@@ -133,12 +135,9 @@ def keyPressed():
         userLoggedIn = True
         
     elif key == ENTER and len(username) <= 0:
-        usernameError = True
-        print("Username must be between 1-8 characters!")
+        usernameError = "Username must be between 1-8 characters!"
     elif key == ENTER and len(password) <= 5:
-        passwordError = True
-        print("Password must be between 5-10 characters!")
-        print(new_psswd)
+        passwordError = "Password must be between 5-10 characters!"
         
 def mousePressed():
     global userBoxSelected, passBoxSelected

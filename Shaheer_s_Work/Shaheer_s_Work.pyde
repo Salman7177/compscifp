@@ -3,7 +3,7 @@ from bio import bioFunction
 
 # create buttons
 button_nav_home = [0, 0, 250, 100, False]
-button_nav_search = [0, 100, 250, 100, False]
+button_nav_post = [0, 100, 250, 100, False]
 button_nav_profile = [0, 620, 250, 100, False]
 button_logout = [0, 520, 250, 100, False]
 button_edit_bio = [410, 100, 130, 30, False]
@@ -51,18 +51,24 @@ def bioUserInterface():
     imageMode(CENTER)
     image(home_icon, 50, 50, 30, 30)
     
+<<<<<<< HEAD
     # search btn
     if button_nav_search[4]:
+=======
+    
+    # post btn
+    if button_nav_post[4]:
+>>>>>>> 778e84fd388570faedc4af352f46630e99833a43
         fill(50)
     else:
         fill(30)
-    rect(button_nav_search[0], button_nav_search[1], button_nav_search[2], button_nav_search[3])
+    rect(button_nav_post[0], button_nav_post[1], button_nav_post[2], button_nav_post[3])
     fill(255)
     textAlign(LEFT, CENTER)
     textSize(32)
-    text("Search", 80, 150)
-    search_icon = loadImage("search.png")
-    image(search_icon, 50, 150, 30, 30)
+    text("Post", 80, 150)
+    post_icon = loadImage("post.png")
+    image(post_icon, 50, 150, 30, 30)
     
     # profile btn
     if button_nav_profile[4]:
@@ -116,12 +122,24 @@ def bioUserInterface():
         text("Submit", 555, 115)
     
     mouse_over_button_logic()
+<<<<<<< HEAD
+=======
+    
+    
+
+
+
+
+
+
+
+>>>>>>> 778e84fd388570faedc4af352f46630e99833a43
 
 def mouse_over_button_logic():
-    global button_nav_home, button_nav_search, button_nav_profile
+    global button_nav_home, button_nav_post, button_nav_profile
     
     button_nav_home[4] = mouseX > button_nav_home[0] and mouseX < button_nav_home[0] + button_nav_home[2] and mouseY > button_nav_home[1] and mouseY < button_nav_home[1] + button_nav_home[3]
-    button_nav_search[4] = mouseX > button_nav_search[0] and mouseX < button_nav_search[0] + button_nav_search[2] and mouseY > button_nav_search[1] and mouseY < button_nav_search[1] + button_nav_search[3]
+    button_nav_post[4] = mouseX > button_nav_post[0] and mouseX < button_nav_post[0] + button_nav_post[2] and mouseY > button_nav_post[1] and mouseY < button_nav_post[1] + button_nav_post[3]
     button_nav_profile[4] = mouseX > button_nav_profile[0] and mouseX < button_nav_profile[0] + button_nav_profile[2] and mouseY > button_nav_profile[1] and mouseY < button_nav_profile[1] + button_nav_profile[3]
     button_edit_bio[4] = mouseX > button_edit_bio[0] and mouseX < button_edit_bio[0] + button_edit_bio[2] and mouseY > button_edit_bio[1] and mouseY < button_edit_bio[1] + button_edit_bio[3]
     button_submit_bio[4] = mouseX > button_submit_bio[0] and mouseX < button_submit_bio[0] + button_submit_bio[2] and mouseY > button_submit_bio[1] and mouseY < button_submit_bio[1] + button_submit_bio[3]
