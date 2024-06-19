@@ -13,6 +13,7 @@ class post_object(object):
         textSize(24)
         text(self.title, 270, self.y + 30)
         textSize(16)
-        text(self.contents, 270, self.y + 60, 950, 150)
+        new_string = self.contents.replace("||", "\n")
+        text(new_string, 270, self.y + 60, 950, 150)
         
         
