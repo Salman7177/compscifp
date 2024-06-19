@@ -17,8 +17,8 @@ def setup():
     loaded_posts = json.load(file_json)
     
     for i in loaded_posts["posts"]:
-        cur_post = post_object(i["id"], i["title"], i["post_txt"])
-        posts.append(cur_post)
+        cur_post = post_object(i["username"], i["title"], i["post_txt"])
+        posts.insert(0, cur_post)
     
     print(len(posts))
     max_scroll = (len(posts) * -200) + height # Max scroll should add up all the heights of each individual post box and subtract the height to make sure it ends at the last post.

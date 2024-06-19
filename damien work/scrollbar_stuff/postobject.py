@@ -11,9 +11,9 @@ class post_object(object):
         rect(250, self.y, 1030, 200)
         fill(0)
         textSize(24)
-        text(self.title, 270, self.y + 30)
+        text(self.title + " - " + self.id, 270, self.y + 30)
         textSize(16)
-        new_string = self.contents.replace("||", "\n")
+        new_string = self.contents.replace("|", "\n")
         text(new_string, 270, self.y + 60, 950, 150)
         
         
