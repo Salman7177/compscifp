@@ -3,6 +3,7 @@
 ## Basic Premise:
 Build a dynamic social media platform where users can post and customize their profiles using processing.
 
+## Features
 Some features that are ***required***:
   * User Profiles and authentication 
   * Hash passwords
@@ -14,7 +15,8 @@ Some other features that are ***optional***:
   * Ability for users to post images
   * Live posts and comments
   * Can visit user profiles to sort through their own posts
-  
+
+## Group Members 
 We will have a group of 4:
 
 Damien
