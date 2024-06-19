@@ -1,6 +1,6 @@
 **1. What advice would you give yourself if you were to start a project like this again?**   
 
-	I would advise our group to start off less ambitious, create that, and then work on incorporating new features one at a time from there. This would ensure that things are created in an orderly fashion where features build on top of each other. This would also help with development as sometimes, when developing, you are creating a feature that relies on the use of another feature which has not been created yet, so you have to wait f**or it. 
+	I would advise our group to start off less ambitious, create that, and then work on incorporating new features one at a time from there. This would ensure that things are created in an orderly fashion where features build on top of each other. This would also help with development as sometimes, when developing, you are creating a feature that relies on the use of another feature which has not been created yet, so you have to wait for it. 
  
 **2. Did you complete everything in your must have list? If no, why not?**
 
