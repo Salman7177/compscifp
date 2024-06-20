@@ -1,7 +1,7 @@
 import json
 from user import UserObject
 from post import postFunction
-from bio import bioFunction
+from pbio import bioFunction
 
 # user variables
 username = ""
@@ -47,6 +47,8 @@ showProfileScreen = False
 showUserScreen = True
 showPostScreen = False
 showAllPosts = False
+
+
 
 def setup():
     size(1280, 720)
