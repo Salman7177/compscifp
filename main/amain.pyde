@@ -1,3 +1,11 @@
+# ----------------------------------------------------------------
+# Name:   Social Media Site
+# Purpose:    A social meia site where users can log in and submit their own posts to a database.
+#
+# Author:   Salman, David, Shaheer, Damien
+# 
+# Created: 31/01/2024
+
 
 # Imports
 import json
@@ -19,7 +27,6 @@ password_error = False
 log_in = False
 
 # post variables
-users = ["Salman", "Damien", "David", "Shaheer"]
 post_txt = ""
 new_post = ""
 title_txt = ""
@@ -52,14 +59,14 @@ button_submit_bio = [550, 100, 130, 30, False]
 bio = ""
 edit_bio = False
 
+# screen states
 show_home_screen = False
 show_profile_screen = False
 show_user_screen = True
 show_post_screen = False
 show_all_posts = False
 
-
-
+# setup
 def setup():
     size(1280, 720)
     noStroke()
@@ -68,6 +75,7 @@ def setup():
     temp_txt = ""
     noStroke()
 
+# draw loop for screen state
 def draw():
     background(240)
     if not user_logged_in:
@@ -80,30 +88,31 @@ def draw():
         post_ui()
         post_MOB()
     if show_home_screen:
-        draw_posts()
         home_ui()
+        draw_posts()
         
-          
-        
+# post mouse on button logic
 def post_MOB():
     global enter_btn, title_section, text_section
-
     enter_btn[4] = mouseX > enter_btn[0] and mouseX < enter_btn[0] + enter_btn[2] and mouseY > enter_btn[1] and mouseY < enter_btn[1] + enter_btn[3]
     title_section[4] = mouseX > title_section[0] and mouseX < title_section[0] + title_section[2] and mouseY > title_section[1] and mouseY < title_section[1] + title_section[3]
     text_section[4] = mouseX > text_section[0] and mouseX < text_section[0] + text_section[2] and mouseY > text_section[1] and mouseY < text_section[1] + text_section[3]
-    
+
+# nav mouse on button logic
 def nav_MOB():
     global button_nav_home, button_nav_post, button_nav_profile, button_nav_logout
     button_nav_home[4] = mouseX > button_nav_home[0] and mouseX < button_nav_home[0] + button_nav_home[2] and mouseY > button_nav_home[1] and mouseY < button_nav_home[1] + button_nav_home[3]
     button_nav_post[4] = mouseX > button_nav_post[0] and mouseX < button_nav_post[0] + button_nav_post[2] and mouseY > button_nav_post[1] and mouseY < button_nav_post[1] + button_nav_post[3]
     button_nav_profile[4] = mouseX > button_nav_profile[0] and mouseX < button_nav_profile[0] + button_nav_profile[2] and mouseY > button_nav_profile[1] and mouseY < button_nav_profile[1] + button_nav_profile[3]
     button_nav_logout[4] = mouseX > button_nav_logout[0] and mouseX < button_nav_logout[0] + button_nav_logout[2] and mouseY > button_nav_logout[1] and mouseY < button_nav_logout[1] + button_nav_logout[3]
-    
+
+# bio mouse on button logic
 def bio_MOB():
     global button_edit_bio, button_submit_bio
     button_edit_bio[4] = mouseX > button_edit_bio[0] and mouseX < button_edit_bio[0] + button_edit_bio[2] and mouseY > button_edit_bio[1] and mouseY < button_edit_bio[1] + button_edit_bio[3]
     button_submit_bio[4] = mouseX > button_submit_bio[0] and mouseX < button_submit_bio[0] + button_submit_bio[2] and mouseY > button_submit_bio[1] and mouseY < button_submit_bio[1] + button_submit_bio[3]
 
+# Navbar for profile screen
 def navbar():
     # top bar
     profile_icon = loadImage("profile.png")
@@ -130,12 +139,13 @@ def navbar():
         rect(button_submit_bio[0], button_submit_bio[1], button_submit_bio[2], button_submit_bio[3])
         fill(0)
         text("Submit", 555, 115)
-        
+  
+# homebar    
 def homebar():
     fill(255)
     text("Home", 410, 50)
 
-    
+# Sidebar used for navigation
 def sidebar():
      #navbar
     # home btn
@@ -191,43 +201,35 @@ def sidebar():
     logout_icon = loadImage("logout.png")
     image(logout_icon, 50, 720 - 150, 50, 50)
 
+# Profile User Interface
 def profile_ui():
-    
     # draw profile page
     fill(30)
     stroke(125)
     rect(0, 0, 250, height)
     rect(250, 0, 1280 - 250, 150)
     
-
-    
     sidebar()
     navbar()
-        
     bio_MOB()
     nav_MOB()
 
+# Home User Interface
 def home_ui():
-
     fill(30)
     stroke(125)
     rect(0, 0, 250, height)
     rect(250, 0, 1280 - 250, 150)
-    
+
     sidebar()
     homebar()
-    
     nav_MOB()
 
+# Post User Interface
 def post_ui():
     global temp_txt, title_txt, tx, ty
-    rectMode(CORNER)
-    # if text_section or title_section:
-    #     cursor(TEXT)
-    # else:
-    #     cursor(POINT)
     
-    # Title Text Box
+    rectMode(CORNER)
     if typing_title:
         fill(200)
         stroke(14,51,23)
@@ -262,12 +264,12 @@ def post_ui():
         fill(grey)
     rect(enter_btn[0], enter_btn[1], enter_btn[2], enter_btn[3])
     
-    
     fill(255)
     textAlign(CORNER, CENTER)
     text("Post", 1217, 167)
     textAlign(CORNER, CENTER)
 
+# Loging User Interface
 def user_ui():
     global username
     background(240)
@@ -336,6 +338,8 @@ def user_ui():
         xpassword += 15
 
     rectMode(CORNER)
+
+# User typing logic 
 def user_typing_function():
     global username, password, user_logged_in, username_error, password_error, show_profile_screen, show_user_screen, log_in
 
@@ -351,35 +355,19 @@ def user_typing_function():
     elif pass_box_selected and len(password) < 10:
         if key not in banned_keys:
             password += key
-        
-    # if key == ENTER and (len(username) > 0 and len(password) > 5):        
-    #     new_psswd = ""
-    #     for i in password:
-    #         new_psswd += str(ord(i))
-    #     userInfo = UserObject(username, password)
-    #     userInfo.convert_to_json(new_psswd)
-    #     user_logged_in = True
-    #     show_profile_screen = True
-    #     show_user_screen = False
-    #     import_posts(False)
-    #     (show_user_screen)
 
     if key == ENTER and (len(username) > 0 and len(password) > 5):        
         new_psswd = [ord(c) for c in password]
         json_psswd = ''.join(map(str, new_psswd))
         
-        
         unhashed_psswd = [chr(c) for c in new_psswd]
         unhashed_psswd = ''.join(unhashed_psswd)
-        
-
 
         with open("data/users-info.json") as raw_json_file:
             data = json.load(raw_json_file)
             
             for a in data['users']:
                 if a['username'] == username and json_psswd == a['password']:
-                    ('found EXACT username and password match')
                     log_in = True
                     
                     
@@ -393,18 +381,14 @@ def user_typing_function():
         user_logged_in = True
         show_profile_screen = True
         show_user_screen = False
-        (show_profile_screen)
         import_posts(True)
 
     elif key == ENTER and len(username) <= 0:
         username_error = True
-        ("Username must be between 1-8 characters!")
     elif key == ENTER and len(password) <= 5:
         password_error = True
-        ("Password must be between 5-10 characters!")
 
-
-
+# Login mouse logic
 def user_mouse_function():
     global user_box_selected, pass_box_selected
     if dist(mouseX, mouseY, 600, 295) <= 100:
@@ -414,9 +398,10 @@ def user_mouse_function():
     elif dist(mouseX, mouseY, 600, 395) <= 100:
         user_box_selected = False
         pass_box_selected = True  
-        
+
+# Post mouse logic    
 def post_mouse_Function():
-    global hold_txt, post_txt, temp_txt, title_txt, typing_title, ty, new_post
+    global hold_txt, post_txt, temp_txt, title_txt, typing_title, ty, new_post, show_post_screen, show_profile_screen, show_home_screen, show_user_screen
     
     if mouseButton == LEFT:
         if title_section[4]:
@@ -438,8 +423,12 @@ def post_mouse_Function():
                 
             ty = 20
             postFunction(0, "", "", "").convert_post_to_json(new_post)
-            ("h")
+            
+            exit()
+            print(show_home_screen)
+            print(show_post_screen)
 
+# post typing logic
 def post_typing_function():
     global post_txt, temp_txt, hold_txt, ty, txtw, title_txt
     
@@ -474,6 +463,7 @@ def post_typing_function():
         ty += 20
         txtw = 0 
 
+# Bio typing logic
 def bio_typing_function():
     global bio, edit_bio
     if edit_bio:
@@ -484,7 +474,8 @@ def bio_typing_function():
         else:
             if len(bio) < 50:
                 bio += key
-                
+
+# bio mouse logic    
 def bio_mouse_function():
     global edit_bio, bio
     if button_edit_bio[4]:
@@ -496,9 +487,9 @@ def bio_mouse_function():
         new_bio = bioFunction(username, bio)
 
         bioFunction("","").write_bio_to_json(new_bio)   
-    
+ 
+# import bio to profile page
 def import_bio():
-    
     file_json = open('bio.json')
     loaded_bio = json.load(file_json)
     for i in loaded_bios["bios"]:
@@ -527,6 +518,7 @@ def import_posts(is_profile):
     max_scroll = (len(posts) * -200) + height - 150 # Max scroll should add up all the heights of each individual post box and subtract the height to make sure it ends at the last post.
     bar.append(Scrollbar(len(posts), scroll_pos, max_scroll))
 
+# Draw all posts
 def draw_posts():
     global posts
     num_posts = 0
@@ -538,6 +530,7 @@ def draw_posts():
         i.scroll_pos = scroll_pos
         i.display()
 
+# 
 def page_state():
     global show_home_screen, show_profile_screen, show_post_screen, show_user_screen, show_all_posts
     
@@ -581,21 +574,13 @@ def keyPressed():
         bio_typing_function()
         
 def mousePressed():
-    ("SHOW USER SCREEN")
-    (show_user_screen)
-    ("SHOW POST SCREEN")
-    (show_post_screen)
-    
-    
-    
+
     if show_user_screen:
         user_mouse_function()
-    elif show_post_screen:
+    if show_post_screen:
         post_mouse_Function()
-    elif show_profile_screen:
+    if show_profile_screen:
         bio_mouse_function()
-        (show_profile_screen)
-        (edit_bio)
         
     page_state()
         
@@ -603,7 +588,6 @@ def mousePressed():
 def mouseWheel(event):
     global scroll_pos, posts, max_scroll
     
-    (max_scroll)
     if max_scroll < 0:
         scroll_pos -= event.getCount() * 25
         if scroll_pos > 0:
