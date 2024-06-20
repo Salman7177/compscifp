@@ -93,7 +93,9 @@ def signOut():
 def keyPressed():
     global username, password, userLoggedIn, usernameError, passwordError
 
-    if key == BACKSPACE and userBoxSelected:
+    if keyCode == SHIFT:
+        pass
+    elif key == BACKSPACE and userBoxSelected:
         username = username[:-1]
     elif key == BACKSPACE and passBoxSelected:
         password = password[:-1]

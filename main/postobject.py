@@ -5,7 +5,6 @@ class post_object(object):
         self.id = id
         self.title = title
         self.contents = contents
-        print("post created")
     
     def draw_posts(self):
         fill(255)
