@@ -9,7 +9,7 @@
             "username": "123123"
         }, 
         {
-            "bio": "Super man is gay", 
+            "bio": "Super man is cool", 
             "user": "asdadsasdasdasdasd"
         }, 
         {
@@ -27,6 +27,10 @@
         {
             "bio": "Asasdasd", 
             "user": "Sasadasd"
+        }, 
+        {
+            "bio": "Superman", 
+            "user": "Salman"
         }
     ]
 }

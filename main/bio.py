@@ -18,4 +18,3 @@ class bioFunction(object):
             json.dump(bio_dict, file_json, ensure_ascii=False, indent=4)
             file_json.write("\n")
     
-        print("h")

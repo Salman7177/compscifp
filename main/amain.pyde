@@ -1,3 +1,5 @@
+
+# Imports
 import json
 from user import UserObject
 from post import postFunction
@@ -68,14 +70,19 @@ def setup():
 
 def draw():
     background(240)
-    
     if not user_logged_in:
         user_ui()
         
     if show_profile_screen:
+        draw_posts()
         profile_ui()
     if show_post_screen:
         post_ui()
+        post_MOB()
+    if show_home_screen:
+        draw_posts()
+        home_ui()
+        
           
         
 def post_MOB():
@@ -97,17 +104,40 @@ def bio_MOB():
     button_edit_bio[4] = mouseX > button_edit_bio[0] and mouseX < button_edit_bio[0] + button_edit_bio[2] and mouseY > button_edit_bio[1] and mouseY < button_edit_bio[1] + button_edit_bio[3]
     button_submit_bio[4] = mouseX > button_submit_bio[0] and mouseX < button_submit_bio[0] + button_submit_bio[2] and mouseY > button_submit_bio[1] and mouseY < button_submit_bio[1] + button_submit_bio[3]
 
-
-
-def profile_ui():
+def navbar():
+    # top bar
+    profile_icon = loadImage("profile.png")
+    image(profile_icon, 350, 80, 100, 100)
+    fill(255)
+    text(username, 410, 50)
+    textSize(20)
+    text(bio, 410, 80)
     
-    # draw profile page
-    fill(30)
-    stroke(125)
-    rect(0, 0, 250, height)
-    rect(250, 0, 1280 - 250, 150)
+    #edit bio button
+    if button_edit_bio[4]:
+        fill(180)
+    else:
+        fill(220)  
+    rect(button_edit_bio[0], button_edit_bio[1], button_edit_bio[2], button_edit_bio[3])
+    fill(0)
+    text("Retype Bio", 425, 115)
     
-    #navbar
+    if edit_bio:
+        if button_edit_bio[4]:
+            fill(180)
+        else:
+            fill(220) 
+        rect(button_submit_bio[0], button_submit_bio[1], button_submit_bio[2], button_submit_bio[3])
+        fill(0)
+        text("Submit", 555, 115)
+        
+def homebar():
+    fill(255)
+    text("Home", 410, 50)
+
+    
+def sidebar():
+     #navbar
     # home btn
     if button_nav_home[4]:
         fill(50)
@@ -160,35 +190,35 @@ def profile_ui():
     text("Logout", 80, 720 - 150)
     logout_icon = loadImage("logout.png")
     image(logout_icon, 50, 720 - 150, 50, 50)
+
+def profile_ui():
     
-    # top bar
-    image(profile_icon, 350, 80, 100, 100)
-    fill(255)
-    text("USERNAME", 410, 50)
-    textSize(20)
-    text(bio, 410, 80)
+    # draw profile page
+    fill(30)
+    stroke(125)
+    rect(0, 0, 250, height)
+    rect(250, 0, 1280 - 250, 150)
     
-    #edit bio button
-    if button_edit_bio[4]:
-        fill(180)
-    else:
-        fill(220)  
-    rect(button_edit_bio[0], button_edit_bio[1], button_edit_bio[2], button_edit_bio[3])
-    fill(0)
-    text("Retype Bio", 425, 115)
+
     
-    if edit_bio:
-        if button_edit_bio[4]:
-            fill(180)
-        else:
-            fill(220) 
-        rect(button_submit_bio[0], button_submit_bio[1], button_submit_bio[2], button_submit_bio[3])
-        fill(0)
-        text("Submit", 555, 115)
+    sidebar()
+    navbar()
         
     bio_MOB()
     nav_MOB()
-        
+
+def home_ui():
+
+    fill(30)
+    stroke(125)
+    rect(0, 0, 250, height)
+    rect(250, 0, 1280 - 250, 150)
+    
+    sidebar()
+    homebar()
+    
+    nav_MOB()
+
 def post_ui():
     global temp_txt, title_txt, tx, ty
     rectMode(CORNER)
@@ -332,7 +362,7 @@ def user_typing_function():
     #     show_profile_screen = True
     #     show_user_screen = False
     #     import_posts(False)
-    #     print(show_user_screen)
+    #     (show_user_screen)
 
     if key == ENTER and (len(username) > 0 and len(password) > 5):        
         new_psswd = [ord(c) for c in password]
@@ -349,7 +379,7 @@ def user_typing_function():
             
             for a in data['users']:
                 if a['username'] == username and json_psswd == a['password']:
-                    print('found EXACT username and password match')
+                    ('found EXACT username and password match')
                     log_in = True
                     
                     
@@ -362,15 +392,16 @@ def user_typing_function():
             
         user_logged_in = True
         show_profile_screen = True
-        print(show_profile_screen)
-        import_posts(False)
+        show_user_screen = False
+        (show_profile_screen)
+        import_posts(True)
 
     elif key == ENTER and len(username) <= 0:
         username_error = True
-        print("Username must be between 1-8 characters!")
+        ("Username must be between 1-8 characters!")
     elif key == ENTER and len(password) <= 5:
         password_error = True
-        print("Password must be between 5-10 characters!")
+        ("Password must be between 5-10 characters!")
 
 
 
@@ -407,7 +438,7 @@ def post_mouse_Function():
                 
             ty = 20
             postFunction(0, "", "", "").convert_post_to_json(new_post)
-            print("h")
+            ("h")
 
 def post_typing_function():
     global post_txt, temp_txt, hold_txt, ty, txtw, title_txt
@@ -465,10 +496,23 @@ def bio_mouse_function():
         new_bio = bioFunction(username, bio)
 
         bioFunction("","").write_bio_to_json(new_bio)   
+    
+def import_bio():
+    
+    file_json = open('bio.json')
+    loaded_bio = json.load(file_json)
+    for i in loaded_bios["bios"]:
+        if i["user"] == username:
+            bio = i["bio"]
+        else:
+            pass
+            
 
 # Imports all posts once user or profile page is loaded. is_profile determines whether to view posts based on user profile or not
 def import_posts(is_profile):
     global posts, max_scroll, bar
+    bar = []
+    posts = []
     
     file_json = open("posts.json")
     loaded_posts = json.load(file_json)
@@ -512,6 +556,7 @@ def page_state():
             show_user_screen = True
             show_post_screen = False
             show_all_posts = False
+            exit()
     
         elif button_nav_post[4]:
             show_post_screen = True
@@ -524,6 +569,7 @@ def page_state():
             show_home_screen = False
             show_post_screen = False
             show_user_screen = False
+            import_posts(True)
     
 
 def keyPressed():
@@ -535,19 +581,29 @@ def keyPressed():
         bio_typing_function()
         
 def mousePressed():
+    ("SHOW USER SCREEN")
+    (show_user_screen)
+    ("SHOW POST SCREEN")
+    (show_post_screen)
+    
+    
+    
     if show_user_screen:
         user_mouse_function()
     elif show_post_screen:
         post_mouse_Function()
     elif show_profile_screen:
         bio_mouse_function()
+        (show_profile_screen)
+        (edit_bio)
+        
     page_state()
         
 # mousewheel scrolling script, if we ever do multiple scrollbars make sure that the user is selected or hovering over the element they want to scroll over.    
 def mouseWheel(event):
     global scroll_pos, posts, max_scroll
     
-    print(max_scroll)
+    (max_scroll)
     if max_scroll < 0:
         scroll_pos -= event.getCount() * 25
         if scroll_pos > 0:

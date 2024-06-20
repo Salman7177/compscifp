@@ -13,7 +13,6 @@ class postFunction(object):
         crue = json.load(file_json)
         crue_2nd = crue["posts"]
         crue_2nd.append({"id": post.id, "user": post.username, "title": post.title, "post_txt": post.post_txt})
-        print(crue_2nd)
         
         post_dict = {"posts":crue_2nd}
     
