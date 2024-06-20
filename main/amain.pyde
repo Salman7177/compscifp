@@ -14,6 +14,7 @@ user_logged_in = False
 banned_keys = [" ", ",", ".", ENTER]
 username_error = False
 password_error = False
+log_in = False
 
 # post variables
 users = ["Salman", "Damien", "David", "Shaheer"]
@@ -42,7 +43,7 @@ typing_title = False
 button_nav_home = [0, 0, 250, 100, False]
 button_nav_post = [0, 100, 250, 100, False]
 button_nav_profile = [0, 620, 250, 100, False]
-button_logout = [0, 520, 250, 100, False]
+button_nav_logout = [0, 520, 250, 100, False]
 button_edit_bio = [410, 100, 130, 30, False]
 button_submit_bio = [550, 100, 130, 30, False]
 
@@ -52,8 +53,8 @@ edit_bio = False
 show_home_screen = False
 show_profile_screen = False
 show_user_screen = True
-showPostScreen = False
-showAllPosts = False
+show_post_screen = False
+show_all_posts = False
 
 
 
@@ -67,18 +68,17 @@ def setup():
 
 def draw():
     background(240)
-    
-    if show_user_screen:
-        userUI()
-    
-    elif show_profile_screen:
-        background(255)
-        draw_posts()
-        bioUI()
+    # if not user_logged_in:
+    #     userUI()
         
+    # if show_profile_screen:
+    #     bioUI()
+    #     print("h")
+    # if show_post_screen:
+    #     postUI()
+     
+    bioUI()       
         
-    
-
 def postMOB():
     global enter_btn, title_section, text_section
 
@@ -87,16 +87,16 @@ def postMOB():
     text_section[4] = mouseX > text_section[0] and mouseX < text_section[0] + text_section[2] and mouseY > text_section[1] and mouseY < text_section[1] + text_section[3]
     
 def navMOB():
-    global button_nav_home, button_nav_post, button_nav_profile
+    global button_nav_home, button_nav_post, button_nav_profile, button_logout
     button_nav_home[4] = mouseX > button_nav_home[0] and mouseX < button_nav_home[0] + button_nav_home[2] and mouseY > button_nav_home[1] and mouseY < button_nav_home[1] + button_nav_home[3]
     button_nav_post[4] = mouseX > button_nav_post[0] and mouseX < button_nav_post[0] + button_nav_post[2] and mouseY > button_nav_post[1] and mouseY < button_nav_post[1] + button_nav_post[3]
     button_nav_profile[4] = mouseX > button_nav_profile[0] and mouseX < button_nav_profile[0] + button_nav_profile[2] and mouseY > button_nav_profile[1] and mouseY < button_nav_profile[1] + button_nav_profile[3]
+    button_nav_logout[4] = mouseX > button_logout[0] and mouseX < button_logout[0] + button_logout[2] and mouseY > button_logout[1] and mouseY < button_logout[1] + button_logout[3]
     
 def bioMOB():
-    global button_edit_bio, button_submit_bio, button_logout
+    global button_edit_bio, button_submit_bio
     button_edit_bio[4] = mouseX > button_edit_bio[0] and mouseX < button_edit_bio[0] + button_edit_bio[2] and mouseY > button_edit_bio[1] and mouseY < button_edit_bio[1] + button_edit_bio[3]
     button_submit_bio[4] = mouseX > button_submit_bio[0] and mouseX < button_submit_bio[0] + button_submit_bio[2] and mouseY > button_submit_bio[1] and mouseY < button_submit_bio[1] + button_submit_bio[3]
-    button_logout[4] = mouseX > button_logout[0] and mouseX < button_logout[0] + button_logout[2] and mouseY > button_logout[1] and mouseY < button_logout[1] + button_logout[3]
 
 def bioUI():
     
@@ -305,8 +305,8 @@ def userUI():
         xpassword += 15
 
     rectMode(CORNER)
-def userTypingFunction():
-    global username, password, user_logged_in, username_error, password_error, show_profile_screen, show_user_screen
+def user_typing_function():
+    global username, password, user_logged_in, username_error, password_error, show_profile_screen, show_user_screen, log_in
 
     if keyCode == SHIFT:
         pass
@@ -344,22 +344,24 @@ def userTypingFunction():
 
 
         with open("data/users-info.json") as raw_json_file:
-            
             data = json.load(raw_json_file)
+            
             for a in data['users']:
-                if a['username'] == username and unhashed_psswd == a['password']:
-                     
+                if a['username'] == username and json_psswd == a['password']:
                     print('found EXACT username and password match')
+                    log_in = True
+                    
                     
                 elif a['username'] == username:
                     username_error = 'Username already exists or you entered the wrong password!'
-        
-        
-        userInfo = UserObject(username, password)
-        userInfo.convert_to_json(json_psswd)
+      
+        if log_in == False:
+            userInfo = UserObject(username, password)
+            userInfo.convert_to_json(json_psswd)
+            
         user_logged_in = True
         show_profile_screen = True
-        show_user_screen = False
+        print(show_profile_screen)
         import_posts(False)
 
     elif key == ENTER and len(username) <= 0:
@@ -371,8 +373,7 @@ def userTypingFunction():
 
 
 
-
-def userMouseFunction():
+def user_mouse_function():
     global user_box_selected, pass_box_selected
     if dist(mouseX, mouseY, 600, 295) <= 100:
         pass_box_selected = False
@@ -382,7 +383,7 @@ def userMouseFunction():
         user_box_selected = False
         pass_box_selected = True  
         
-def postMouseFunction():
+def post_mouse_Function():
     global hold_txt, post_txt, temp_txt, title_txt, typing_title, ty, new_post
     
     if mouseButton == LEFT:
@@ -407,7 +408,7 @@ def postMouseFunction():
             postFunction(0, "", "", "").convert_post_to_json(new_post)
             print("h")
 
-def postTypingFunction():
+def post_typing_function():
     global post_txt, temp_txt, hold_txt, ty, txtw, title_txt
     
     if keyCode == SHIFT:
@@ -441,7 +442,7 @@ def postTypingFunction():
         ty += 20
         txtw = 0 
 
-def bioTypingFunction():
+def bio_typing_function():
     global bio, edit_bio
     if edit_bio:
         if keyCode == SHIFT:
@@ -452,7 +453,7 @@ def bioTypingFunction():
             if len(bio) < 50:
                 bio += key
                 
-def bioMouseFunction():
+def bio_mouse_function():
     global edit_bio, bio
     if button_edit_bio[4]:
         edit_bio = True
@@ -466,7 +467,7 @@ def bioMouseFunction():
 
 # Imports all posts once user or profile page is loaded. is_profile determines whether to view posts based on user profile or not
 def import_posts(is_profile):
-    global posts, max_scroll
+    global posts, max_scroll, bar
     
     file_json = open("posts.json")
     loaded_posts = json.load(file_json)
@@ -478,7 +479,6 @@ def import_posts(is_profile):
         else:
             cur_post = post_object(i["user"], i["title"], i["post_txt"])
             posts.insert(0, cur_post)
-    print(len(posts))
     max_scroll = (len(posts) * -200) + height - 150 # Max scroll should add up all the heights of each individual post box and subtract the height to make sure it ends at the last post.
     bar.append(Scrollbar(len(posts), scroll_pos, max_scroll))
 
@@ -494,25 +494,53 @@ def draw_posts():
         i.display()
 
 def page_state():
-    if mouseButton == LEFT and button_nav_home[4]:
-        show_home_screen = True
-        import_posts(False)
+    global show_home_screen, show_profile_screen, show_post_screen, show_user_screen, show_all_posts
+    
+    if mouseButton == LEFT:
+        if button_nav_home[4]:
+            show_home_screen = True
+            show_profile_screen = False
+            show_post_screen = False
+            show_user_screen = False
+            import_posts(False)
+
+        elif button_nav_logout[4]:
+            user_logged_in = False
+            show_home_screen = False
+            show_profile_screen = False
+            show_user_screen = True
+            show_post_screen = False
+            show_all_posts = False
+    
+        elif button_nav_post[4]:
+            show_post_screen = True
+            show_home_screen = False
+            show_profile_screen = False
+            show_user_screen = False
+
+        elif button_nav_profile[4]:
+            show_profile_screen = True
+            show_home_screen = False
+            show_post_screen = False
+            show_user_screen = False
+    
 
 def keyPressed():
     if show_user_screen:
-        userTypingFunction()
-    elif showPostScreen:
-        postTypingFunction()
+        user_typing_function()
+    elif show_post_screen:
+        post_typing_function()
     elif show_profile_screen:
-        bioTypingFunction()
+        bio_typing_function()
         
 def mousePressed():
     if show_user_screen:
-        userMouseFunction()
-    elif showPostScreen:
-        postMouseFunction()
+        user_mouse_function()
+    elif show_post_screen:
+        post_mouse_Function()
     elif show_profile_screen:
-        bioMouseFunction()
+        bio_mouse_function()
+    page_state()
         
 # mousewheel scrolling script, if we ever do multiple scrollbars make sure that the user is selected or hovering over the element they want to scroll over.    
 def mouseWheel(event):
