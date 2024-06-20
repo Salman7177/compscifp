@@ -8,12 +8,12 @@ from scrollbar import Scrollbar
 # user variables
 username = ""
 password = ""
-userBoxSelected = False
-passBoxSelected = False
-userLoggedIn = False
+user_box_selected = False
+pass_box_selected = False
+user_logged_in = False
 banned_keys = [" ", ",", ".", ENTER]
-usernameError = False
-passwordError = False
+username_error = False
+password_error = False
 
 # post variables
 users = ["Salman", "Damien", "David", "Shaheer"]
@@ -40,7 +40,7 @@ typing_title = False
 
 # create buttons
 button_nav_home = [0, 0, 250, 100, False]
-button_nav_search = [0, 100, 250, 100, False]
+button_nav_post = [0, 100, 250, 100, False]
 button_nav_profile = [0, 620, 250, 100, False]
 button_logout = [0, 520, 250, 100, False]
 button_edit_bio = [410, 100, 130, 30, False]
@@ -49,9 +49,9 @@ button_submit_bio = [550, 100, 130, 30, False]
 bio = ""
 edit_bio = False
 
-showHomeScreen = False
-showProfileScreen = False
-showUserScreen = True
+show_home_screen = False
+show_profile_screen = False
+show_user_screen = True
 showPostScreen = False
 showAllPosts = False
 
@@ -68,12 +68,10 @@ def setup():
 def draw():
     background(240)
     
-    if showUserScreen:
+    if show_user_screen:
         userUI()
     
-
-    
-    elif showProfileScreen:
+    elif show_profile_screen:
         background(255)
         draw_posts()
         bioUI()
@@ -89,9 +87,9 @@ def postMOB():
     text_section[4] = mouseX > text_section[0] and mouseX < text_section[0] + text_section[2] and mouseY > text_section[1] and mouseY < text_section[1] + text_section[3]
     
 def navMOB():
-    global button_nav_home, button_nav_search, button_nav_profile
+    global button_nav_home, button_nav_post, button_nav_profile
     button_nav_home[4] = mouseX > button_nav_home[0] and mouseX < button_nav_home[0] + button_nav_home[2] and mouseY > button_nav_home[1] and mouseY < button_nav_home[1] + button_nav_home[3]
-    button_nav_search[4] = mouseX > button_nav_search[0] and mouseX < button_nav_search[0] + button_nav_search[2] and mouseY > button_nav_search[1] and mouseY < button_nav_search[1] + button_nav_search[3]
+    button_nav_post[4] = mouseX > button_nav_post[0] and mouseX < button_nav_post[0] + button_nav_post[2] and mouseY > button_nav_post[1] and mouseY < button_nav_post[1] + button_nav_post[3]
     button_nav_profile[4] = mouseX > button_nav_profile[0] and mouseX < button_nav_profile[0] + button_nav_profile[2] and mouseY > button_nav_profile[1] and mouseY < button_nav_profile[1] + button_nav_profile[3]
     
 def bioMOB():
@@ -100,92 +98,6 @@ def bioMOB():
     button_submit_bio[4] = mouseX > button_submit_bio[0] and mouseX < button_submit_bio[0] + button_submit_bio[2] and mouseY > button_submit_bio[1] and mouseY < button_submit_bio[1] + button_submit_bio[3]
     button_logout[4] = mouseX > button_logout[0] and mouseX < button_logout[0] + button_logout[2] and mouseY > button_logout[1] and mouseY < button_logout[1] + button_logout[3]
 
-# def navUI():
-    
-#     #navbar
-#     # home btn
-#     if button_nav_home[4]:
-#         fill(50)
-#     else:
-#         fill(30)
-#     rect(button_nav_home[0], button_nav_home[1], button_nav_home[2], button_nav_home[3])
-#     fill(255)
-#     textAlign(LEFT, CENTER)
-#     textSize(32)
-#     text("Home", 80, 50)
-#     home_icon = loadImage("home.png")
-#     imageMode(CENTER)
-#     image(home_icon, 50, 50, 30, 30)
-    
-#     # search btn
-#     if button_nav_search[4]:
-#         fill(50)
-#     else:
-#         fill(30)
-#     rect(button_nav_search[0], button_nav_search[1], button_nav_search[2], button_nav_search[3])
-#     fill(255)
-#     textAlign(LEFT, CENTER)
-#     textSize(32)
-#     text("Search", 80, 150)
-#     search_icon = loadImage("search.png")
-#     image(search_icon, 50, 150, 30, 30)
-    
-#     # profile btn
-#     if button_nav_profile[4]:
-#         fill(50)
-#     else:
-#         fill(30)    
-#     rect(button_nav_profile[0], button_nav_profile[1], button_nav_profile[2], button_nav_profile[3])
-#     fill(255)
-#     textAlign(LEFT, CENTER)
-#     textSize(32)
-#     text("Username", 80, 720 - 50)
-#     profile_icon = loadImage("profile.png")
-#     image(profile_icon, 50, 720 - 50, 50, 50)
-    
-#     #logout button
-#     if button_logout[4]:
-#         fill(50)
-#     else:
-#         fill(30)    
-#     rect(button_logout[0], button_logout[1], button_logout[2], button_logout[3])
-#     fill(255)
-#     textAlign(LEFT, CENTER)
-#     textSize(32)
-#     text("Logout", 80, 720 - 150)
-#     logout_icon = loadImage("logout.png")
-#     image(logout_icon, 50, 720 - 150, 50, 50)
-    
-#     # top bar
-#     image(profile_icon, 350, 80, 100, 100)
-#     fill(255)
-#     text("USERNAME", 410, 50)
-#     textSize(20)
-#     text(bio, 410, 80)
-    
-#     navMOB()
-
-# def profileUI():
-#     #edit bio button
-#     if button_edit_bio[4]:
-#         fill(180)
-#     else:
-#         fill(220)  
-#     rect(button_edit_bio[0], button_edit_bio[1], button_edit_bio[2], button_edit_bio[3])
-#     fill(0)
-#     text("Retype Bio", 425, 115)
-    
-#     if edit_bio:
-#         if button_edit_bio[4]:
-#             fill(180)
-#         else:
-#             fill(220) 
-#         rect(button_submit_bio[0], button_submit_bio[1], button_submit_bio[2], button_submit_bio[3])
-#         fill(0)
-#         text("Submit", 555, 115)
-    
-#     bioMOB()
-        
 def bioUI():
     
     # draw profile page
@@ -209,18 +121,18 @@ def bioUI():
     imageMode(CENTER)
     image(home_icon, 50, 50, 30, 30)
     
-    # search btn
-    if button_nav_search[4]:
+    # post btn
+    if button_nav_post[4]:
         fill(50)
     else:
         fill(30)
-    rect(button_nav_search[0], button_nav_search[1], button_nav_search[2], button_nav_search[3])
+    rect(button_nav_post[0], button_nav_post[1], button_nav_post[2], button_nav_post[3])
     fill(255)
     textAlign(LEFT, CENTER)
     textSize(32)
-    text("Search", 80, 150)
-    search_icon = loadImage("search.png")
-    image(search_icon, 50, 150, 30, 30)
+    text("Post", 80, 150)
+    post_icon = loadImage("post.png")
+    image(post_icon, 50, 150, 30, 30)
     
     # profile btn
     if button_nav_profile[4]:
@@ -343,21 +255,21 @@ def userUI():
     rect(600, 295, 200, 30)
     fill(0)
     
-    if usernameError:
+    if username_error:
         fill(255, 0, 0)
         textSize(15)
         text("Username must be between 1-8 characters!", 500, 325)
         fill(0)
         textSize(20)
     
-    if passwordError:
+    if password_error:
         fill(255, 0, 0)
         textSize(15)
         text("Password must be between 5-10 characters!", 500, 425)
         fill(0)
         textSize(20)
     
-    if userBoxSelected:
+    if user_box_selected:
         stroke(0, 0, 255)
         strokeWeight(3)
         fill(255)
@@ -372,7 +284,7 @@ def userUI():
     fill(255)
     rect(600, 395, 200, 30)
     
-    if passBoxSelected:
+    if pass_box_selected:
         stroke(0, 0, 255)
         strokeWeight(3)
         fill(255)
@@ -394,49 +306,81 @@ def userUI():
 
     rectMode(CORNER)
 def userTypingFunction():
-    global username, password, userLoggedIn, usernameError, passwordError, showProfileScreen, showUserScreen
+    global username, password, user_logged_in, username_error, password_error, show_profile_screen, show_user_screen
 
     if keyCode == SHIFT:
         pass
-    elif key == BACKSPACE and userBoxSelected:
+    elif key == BACKSPACE and user_box_selected:
         username = username[:-1]
-    elif key == BACKSPACE and passBoxSelected:
+    elif key == BACKSPACE and pass_box_selected:
         password = password[:-1]
-    elif userBoxSelected and len(username) < 18:
+    elif user_box_selected and len(username) < 18:
         if key not in banned_keys:
             username += key
-    elif passBoxSelected and len(password) < 10:
+    elif pass_box_selected and len(password) < 10:
         if key not in banned_keys:
             password += key
         
+    # if key == ENTER and (len(username) > 0 and len(password) > 5):        
+    #     new_psswd = ""
+    #     for i in password:
+    #         new_psswd += str(ord(i))
+    #     userInfo = UserObject(username, password)
+    #     userInfo.convert_to_json(new_psswd)
+    #     user_logged_in = True
+    #     show_profile_screen = True
+    #     show_user_screen = False
+    #     import_posts(False)
+    #     print(show_user_screen)
+
     if key == ENTER and (len(username) > 0 and len(password) > 5):        
-        new_psswd = ""
-        for i in password:
-            new_psswd += str(ord(i))
-        print(new_psswd) # asdASd
+        new_psswd = [ord(c) for c in password]
+        json_psswd = ''.join(map(str, new_psswd))
+        
+        
+        unhashed_psswd = [chr(c) for c in new_psswd]
+        unhashed_psswd = ''.join(unhashed_psswd)
+        
+
+
+        with open("data/users-info.json") as raw_json_file:
+            
+            data = json.load(raw_json_file)
+            for a in data['users']:
+                if a['username'] == username and unhashed_psswd == a['password']:
+                     
+                    print('found EXACT username and password match')
+                    
+                elif a['username'] == username:
+                    username_error = 'Username already exists or you entered the wrong password!'
+        
+        
         userInfo = UserObject(username, password)
-        userInfo.convert_to_json(new_psswd)
-        userLoggedIn = True
-        showProfileScreen = True
-        showUserScreen = False
+        userInfo.convert_to_json(json_psswd)
+        user_logged_in = True
+        show_profile_screen = True
+        show_user_screen = False
         import_posts(False)
-        print(showUserScreen)
+
     elif key == ENTER and len(username) <= 0:
-        usernameError = True
+        username_error = True
         print("Username must be between 1-8 characters!")
     elif key == ENTER and len(password) <= 5:
-        passwordError = True
+        password_error = True
         print("Password must be between 5-10 characters!")
 
+
+
+
 def userMouseFunction():
-    global userBoxSelected, passBoxSelected
+    global user_box_selected, pass_box_selected
     if dist(mouseX, mouseY, 600, 295) <= 100:
-        passBoxSelected = False
-        userBoxSelected = True
+        pass_box_selected = False
+        user_box_selected = True
     
     elif dist(mouseX, mouseY, 600, 395) <= 100:
-        userBoxSelected = False
-        passBoxSelected = True  
+        user_box_selected = False
+        pass_box_selected = True  
         
 def postMouseFunction():
     global hold_txt, post_txt, temp_txt, title_txt, typing_title, ty, new_post
@@ -549,20 +493,25 @@ def draw_posts():
         i.scroll_pos = scroll_pos
         i.display()
 
+def page_state():
+    if mouseButton == LEFT and button_nav_home[4]:
+        show_home_screen = True
+        import_posts(False)
+
 def keyPressed():
-    if showUserScreen:
+    if show_user_screen:
         userTypingFunction()
     elif showPostScreen:
         postTypingFunction()
-    elif showProfileScreen:
+    elif show_profile_screen:
         bioTypingFunction()
         
 def mousePressed():
-    if showUserScreen:
+    if show_user_screen:
         userMouseFunction()
     elif showPostScreen:
         postMouseFunction()
-    elif showProfileScreen:
+    elif show_profile_screen:
         bioMouseFunction()
         
 # mousewheel scrolling script, if we ever do multiple scrollbars make sure that the user is selected or hovering over the element they want to scroll over.    

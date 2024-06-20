@@ -8,7 +8,6 @@ class postFunction(object):
         self.post_txt = post_txt
     
     def convert_post_to_json(self, post):
-        print("H")
         fp = "data/posts.json"
         file_json = open(fp)
         crue = json.load(file_json)

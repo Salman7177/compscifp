@@ -7,6 +7,8 @@ userBoxSelected = False
 passBoxSelected = False
 userLoggedIn = False
 
+logIn = False
+
 banned_keys = [" ", ",", ".", ENTER]
 
 usernameError = " "
@@ -91,9 +93,11 @@ def signOut():
     userLoggedIn = False
 
 def keyPressed():
-    global username, password, userLoggedIn, usernameError, passwordError
+    global username, password, userLoggedIn, usernameError, passwordError, logIn
 
-    if key == BACKSPACE and userBoxSelected:
+    if keyCode == SHIFT:
+        pass
+    elif key == BACKSPACE and userBoxSelected:
         username = username[:-1]
     elif key == BACKSPACE and passBoxSelected:
         password = password[:-1]
@@ -109,30 +113,33 @@ def keyPressed():
         json_psswd = ''.join(map(str, new_psswd))
         
 
-        print(new_psswd)
-        print(json_psswd)
+        # print(new_psswd)
+        # print(json_psswd)
         
-        unhashed_psswd = [chr(c) for c in new_psswd]
-        unhashed_psswd = ''.join(unhashed_psswd)
+        # unhashed_psswd = [chr(c) for c in new_psswd]
+        # unhashed_psswd = ''.join(unhashed_psswd)
         
-        print(unhashed_psswd)
+        # print(unhashed_psswd)
 
-
+        
         with open("users-info.json") as raw_json_file:
-            
             data = json.load(raw_json_file)
+            
             for a in data['users']:
-                if a['username'] == username and unhashed_psswd == a['password']:
-                     
+                if a['username'] == username and json_psswd == a['password']:
                     print('found EXACT username and password match')
+                    logIn = True
+                    
                     
                 elif a['username'] == username:
                     usernameError = 'Username already exists or you entered the wrong password!'
-        
-        
-        userInfo = UserObject(username, password)
-        userInfo.convert_to_json(json_psswd)
+      
+        if logIn == False:
+            userInfo = UserObject(username, password)
+            userInfo.convert_to_json(json_psswd)
+
         userLoggedIn = True
+        
         
     elif key == ENTER and len(username) <= 0:
         usernameError = "Username must be between 1-8 characters!"

@@ -4,12 +4,6 @@ class UserObject(object):
     def __init__(self, username, password):
         self.username = username
         self.password = password
-        
-    # def hash_password(self, passwd):
-    #     new_psswd = ""
-    #     for i in passwd:
-    #         new_psswd += str(ord(i))
-    #     return new_psswd    
     
     def convert_to_json(self, hashed_psswd):
         fp = "data/users-info.json"
