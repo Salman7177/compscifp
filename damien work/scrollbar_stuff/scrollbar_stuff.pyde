@@ -1,14 +1,15 @@
+# Imported libraries
 import json
-from scrollbar import Scrollbar
+from scrollbar import scrollbar
 from postobject import post_object
-# the scrollbar works off a set list and scroll position based on the main program. you'll have to set that up once we bring everything together.
 
-# the scrollbar needs a set list of posts and a scroll position to work off of.
+
+# Global variables to keep track of classes made and page position
 posts = []
 bar = []
 scroll_pos = 0
 
-# put in setup as an example, but when we switch pages i must have a list of posts defined so creating the scrollbar can read from it and determine its length.
+# Loads all the posts and creates a class using the data from the json. In the JSON file, "id" is unused.
 def setup():
     global posts, max_scroll
     size(1280, 720)
@@ -20,11 +21,10 @@ def setup():
         cur_post = post_object(i["username"], i["title"], i["post_txt"])
         posts.insert(0, cur_post)
     
-    print(len(posts))
     max_scroll = (len(posts) * -200) + height # Max scroll should add up all the heights of each individual post box and subtract the height to make sure it ends at the last post.
-    bar.append(Scrollbar(len(posts), scroll_pos, max_scroll))
+    bar.append(scrollbar(len(posts), scroll_pos, max_scroll))
 
-#example boxes, for i in bar sets the internal scroll position to the global scroll position and updates its position.
+# Draws the posts and scrollbar based off of scroll position
 def draw():
     global posts
     num_posts = 0
@@ -37,11 +37,10 @@ def draw():
         i.scroll_pos = scroll_pos
         i.display()
         
-# mousewheel scrolling script, if we ever do multiple scrollbars make sure that the user is selected or hovering over the element they want to scroll over.    
+# Adds or subtracts the scroll position on mousewheel. 
 def mouseWheel(event):
     global scroll_pos, posts, max_scroll
     
-    print(max_scroll)
     if max_scroll < 0:
         scroll_pos -= event.getCount() * 25
         if scroll_pos > 0:

@@ -1,4 +1,4 @@
-class Scrollbar(object):
+class scrollbar(object):
     
     # Initial variables
     def __init__(self, posts, position, max_pos):
