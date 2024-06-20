@@ -40,7 +40,7 @@ typing_title = False
 
 # create buttons
 button_nav_home = [0, 0, 250, 100, False]
-button_nav_search = [0, 100, 250, 100, False]
+button_nav_post = [0, 100, 250, 100, False]
 button_nav_profile = [0, 620, 250, 100, False]
 button_logout = [0, 520, 250, 100, False]
 button_edit_bio = [410, 100, 130, 30, False]
@@ -71,8 +71,6 @@ def draw():
     if showUserScreen:
         userUI()
     
-
-    
     elif showProfileScreen:
         background(255)
         draw_posts()
@@ -89,9 +87,9 @@ def postMOB():
     text_section[4] = mouseX > text_section[0] and mouseX < text_section[0] + text_section[2] and mouseY > text_section[1] and mouseY < text_section[1] + text_section[3]
     
 def navMOB():
-    global button_nav_home, button_nav_search, button_nav_profile
+    global button_nav_home, button_nav_post, button_nav_profile
     button_nav_home[4] = mouseX > button_nav_home[0] and mouseX < button_nav_home[0] + button_nav_home[2] and mouseY > button_nav_home[1] and mouseY < button_nav_home[1] + button_nav_home[3]
-    button_nav_search[4] = mouseX > button_nav_search[0] and mouseX < button_nav_search[0] + button_nav_search[2] and mouseY > button_nav_search[1] and mouseY < button_nav_search[1] + button_nav_search[3]
+    button_nav_post[4] = mouseX > button_nav_post[0] and mouseX < button_nav_post[0] + button_nav_post[2] and mouseY > button_nav_post[1] and mouseY < button_nav_post[1] + button_nav_post[3]
     button_nav_profile[4] = mouseX > button_nav_profile[0] and mouseX < button_nav_profile[0] + button_nav_profile[2] and mouseY > button_nav_profile[1] and mouseY < button_nav_profile[1] + button_nav_profile[3]
     
 def bioMOB():
@@ -100,92 +98,6 @@ def bioMOB():
     button_submit_bio[4] = mouseX > button_submit_bio[0] and mouseX < button_submit_bio[0] + button_submit_bio[2] and mouseY > button_submit_bio[1] and mouseY < button_submit_bio[1] + button_submit_bio[3]
     button_logout[4] = mouseX > button_logout[0] and mouseX < button_logout[0] + button_logout[2] and mouseY > button_logout[1] and mouseY < button_logout[1] + button_logout[3]
 
-# def navUI():
-    
-#     #navbar
-#     # home btn
-#     if button_nav_home[4]:
-#         fill(50)
-#     else:
-#         fill(30)
-#     rect(button_nav_home[0], button_nav_home[1], button_nav_home[2], button_nav_home[3])
-#     fill(255)
-#     textAlign(LEFT, CENTER)
-#     textSize(32)
-#     text("Home", 80, 50)
-#     home_icon = loadImage("home.png")
-#     imageMode(CENTER)
-#     image(home_icon, 50, 50, 30, 30)
-    
-#     # search btn
-#     if button_nav_search[4]:
-#         fill(50)
-#     else:
-#         fill(30)
-#     rect(button_nav_search[0], button_nav_search[1], button_nav_search[2], button_nav_search[3])
-#     fill(255)
-#     textAlign(LEFT, CENTER)
-#     textSize(32)
-#     text("Search", 80, 150)
-#     search_icon = loadImage("search.png")
-#     image(search_icon, 50, 150, 30, 30)
-    
-#     # profile btn
-#     if button_nav_profile[4]:
-#         fill(50)
-#     else:
-#         fill(30)    
-#     rect(button_nav_profile[0], button_nav_profile[1], button_nav_profile[2], button_nav_profile[3])
-#     fill(255)
-#     textAlign(LEFT, CENTER)
-#     textSize(32)
-#     text("Username", 80, 720 - 50)
-#     profile_icon = loadImage("profile.png")
-#     image(profile_icon, 50, 720 - 50, 50, 50)
-    
-#     #logout button
-#     if button_logout[4]:
-#         fill(50)
-#     else:
-#         fill(30)    
-#     rect(button_logout[0], button_logout[1], button_logout[2], button_logout[3])
-#     fill(255)
-#     textAlign(LEFT, CENTER)
-#     textSize(32)
-#     text("Logout", 80, 720 - 150)
-#     logout_icon = loadImage("logout.png")
-#     image(logout_icon, 50, 720 - 150, 50, 50)
-    
-#     # top bar
-#     image(profile_icon, 350, 80, 100, 100)
-#     fill(255)
-#     text("USERNAME", 410, 50)
-#     textSize(20)
-#     text(bio, 410, 80)
-    
-#     navMOB()
-
-# def profileUI():
-#     #edit bio button
-#     if button_edit_bio[4]:
-#         fill(180)
-#     else:
-#         fill(220)  
-#     rect(button_edit_bio[0], button_edit_bio[1], button_edit_bio[2], button_edit_bio[3])
-#     fill(0)
-#     text("Retype Bio", 425, 115)
-    
-#     if edit_bio:
-#         if button_edit_bio[4]:
-#             fill(180)
-#         else:
-#             fill(220) 
-#         rect(button_submit_bio[0], button_submit_bio[1], button_submit_bio[2], button_submit_bio[3])
-#         fill(0)
-#         text("Submit", 555, 115)
-    
-#     bioMOB()
-        
 def bioUI():
     
     # draw profile page
@@ -209,18 +121,18 @@ def bioUI():
     imageMode(CENTER)
     image(home_icon, 50, 50, 30, 30)
     
-    # search btn
-    if button_nav_search[4]:
+    # post btn
+    if button_nav_post[4]:
         fill(50)
     else:
         fill(30)
-    rect(button_nav_search[0], button_nav_search[1], button_nav_search[2], button_nav_search[3])
+    rect(button_nav_post[0], button_nav_post[1], button_nav_post[2], button_nav_post[3])
     fill(255)
     textAlign(LEFT, CENTER)
     textSize(32)
-    text("Search", 80, 150)
-    search_icon = loadImage("search.png")
-    image(search_icon, 50, 150, 30, 30)
+    text("Post", 80, 150)
+    post_icon = loadImage("post.png")
+    image(post_icon, 50, 150, 30, 30)
     
     # profile btn
     if button_nav_profile[4]:
@@ -409,24 +321,56 @@ def userTypingFunction():
         if key not in banned_keys:
             password += key
         
+    # if key == ENTER and (len(username) > 0 and len(password) > 5):        
+    #     new_psswd = ""
+    #     for i in password:
+    #         new_psswd += str(ord(i))
+    #     userInfo = UserObject(username, password)
+    #     userInfo.convert_to_json(new_psswd)
+    #     userLoggedIn = True
+    #     showProfileScreen = True
+    #     showUserScreen = False
+    #     import_posts(False)
+    #     print(showUserScreen)
+
     if key == ENTER and (len(username) > 0 and len(password) > 5):        
-        new_psswd = ""
-        for i in password:
-            new_psswd += str(ord(i))
-        print(new_psswd) # asdASd
+        new_psswd = [ord(c) for c in password]
+        json_psswd = ''.join(map(str, new_psswd))
+        
+        
+        unhashed_psswd = [chr(c) for c in new_psswd]
+        unhashed_psswd = ''.join(unhashed_psswd)
+        
+
+
+        with open("data/users-info.json") as raw_json_file:
+            
+            data = json.load(raw_json_file)
+            for a in data['users']:
+                if a['username'] == username and unhashed_psswd == a['password']:
+                     
+                    print('found EXACT username and password match')
+                    
+                elif a['username'] == username:
+                    usernameError = 'Username already exists or you entered the wrong password!'
+        
+        
         userInfo = UserObject(username, password)
-        userInfo.convert_to_json(new_psswd)
+        userInfo.convert_to_json(json_psswd)
         userLoggedIn = True
         showProfileScreen = True
         showUserScreen = False
         import_posts(False)
-        print(showUserScreen)
+
     elif key == ENTER and len(username) <= 0:
         usernameError = True
         print("Username must be between 1-8 characters!")
     elif key == ENTER and len(password) <= 5:
         passwordError = True
         print("Password must be between 5-10 characters!")
+
+
+
 
 def userMouseFunction():
     global userBoxSelected, passBoxSelected
@@ -548,6 +492,11 @@ def draw_posts():
     for i in bar:
         i.scroll_pos = scroll_pos
         i.display()
+
+def page_state():
+    if mouseButton == LEFT and button_nav_home[4]:
+        showHomeScreen = True
+        import_posts(False)
 
 def keyPressed():
     if showUserScreen:
