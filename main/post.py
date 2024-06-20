@@ -21,3 +21,4 @@ class postFunction(object):
         with open(fp, "w") as file_json:
             json.dump(post_dict, file_json, ensure_ascii=False, indent=4)
             file_json.write("\n")
+    

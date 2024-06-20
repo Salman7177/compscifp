@@ -4,7 +4,7 @@
             "title": "123563", 
             "post_txt": "5756868", 
             "id": 171, 
-            "username": "Damien"
+            "user": "Damien"
         }, 
         {
             "title": "Shaheer is the deer", 
@@ -21,6 +21,12 @@
         {
             "title": "asdasdasd", 
             "post_txt": "asdasdasdasdasdasddsdasasdasd", 
+            "id": 479, 
+            "user": "123123"
+        },
+	{
+            "title": "THIS IS A TEST STRING", 
+            "post_txt": "This is a test|to test this string|it lets me test things!", 
             "id": 479, 
             "user": "123123"
         }

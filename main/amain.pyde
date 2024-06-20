@@ -1,7 +1,9 @@
 import json
 from user import UserObject
 from post import postFunction
-from pbio import bioFunction
+from bio import bioFunction
+from postobject import post_object
+from scrollbar import Scrollbar
 
 # user variables
 username = ""
@@ -22,6 +24,11 @@ temp_txt = ""
 hold_txt = []
 ty = 20
 txtw = 0
+
+# post drawing variables
+posts = []
+bar = []
+scroll_pos = 0
 
 enter_btn = [1185, 150, 90, 35, False]
 title_section = [300, 0, 300, 30, False]
@@ -68,7 +75,10 @@ def draw():
     
     elif showProfileScreen:
         background(255)
+        draw_posts()
         bioUI()
+        
+        
     
 
 def postMOB():
@@ -409,6 +419,7 @@ def userTypingFunction():
         userLoggedIn = True
         showProfileScreen = True
         showUserScreen = False
+        import_posts(False)
         print(showUserScreen)
     elif key == ENTER and len(username) <= 0:
         usernameError = True
@@ -507,7 +518,36 @@ def bioMouseFunction():
         edit_bio = False
         new_bio = bioFunction(username, bio)
 
-        bioFunction("","").write_bio_to_json(new_bio)                
+        bioFunction("","").write_bio_to_json(new_bio)   
+
+# Imports all posts once user or profile page is loaded. is_profile determines whether to view posts based on user profile or not
+def import_posts(is_profile):
+    global posts, max_scroll
+    
+    file_json = open("posts.json")
+    loaded_posts = json.load(file_json)
+    for i in loaded_posts["posts"]:
+        if is_profile == True:
+            if i["user"] == username:
+                cur_post = post_object(i["user"], i["title"], i["post_txt"])
+                posts.insert(0, cur_post)
+        else:
+            cur_post = post_object(i["user"], i["title"], i["post_txt"])
+            posts.insert(0, cur_post)
+    print(len(posts))
+    max_scroll = (len(posts) * -200) + height - 150 # Max scroll should add up all the heights of each individual post box and subtract the height to make sure it ends at the last post.
+    bar.append(Scrollbar(len(posts), scroll_pos, max_scroll))
+
+def draw_posts():
+    global posts
+    num_posts = 0
+    for i in posts:
+        i.y = (200 * num_posts) + scroll_pos + 150
+        i.draw_posts()
+        num_posts += 1
+    for i in bar:
+        i.scroll_pos = scroll_pos
+        i.display()
 
 def keyPressed():
     if showUserScreen:
@@ -524,3 +564,15 @@ def mousePressed():
         postMouseFunction()
     elif showProfileScreen:
         bioMouseFunction()
+        
+# mousewheel scrolling script, if we ever do multiple scrollbars make sure that the user is selected or hovering over the element they want to scroll over.    
+def mouseWheel(event):
+    global scroll_pos, posts, max_scroll
+    
+    print(max_scroll)
+    if max_scroll < 0:
+        scroll_pos -= event.getCount() * 25
+        if scroll_pos > 0:
+            scroll_pos = 0
+        elif scroll_pos < max_scroll:
+            scroll_pos = max_scroll
