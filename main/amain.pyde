@@ -68,37 +68,38 @@ def setup():
 
 def draw():
     background(240)
-    # if not user_logged_in:
-    #     userUI()
+    
+    if not user_logged_in:
+        user_ui()
         
-    # if show_profile_screen:
-    #     bioUI()
-    #     print("h")
-    # if show_post_screen:
-    #     postUI()
-     
-    bioUI()       
+    if show_profile_screen:
+        profile_ui()
+    if show_post_screen:
+        post_ui()
+          
         
-def postMOB():
+def post_MOB():
     global enter_btn, title_section, text_section
 
     enter_btn[4] = mouseX > enter_btn[0] and mouseX < enter_btn[0] + enter_btn[2] and mouseY > enter_btn[1] and mouseY < enter_btn[1] + enter_btn[3]
     title_section[4] = mouseX > title_section[0] and mouseX < title_section[0] + title_section[2] and mouseY > title_section[1] and mouseY < title_section[1] + title_section[3]
     text_section[4] = mouseX > text_section[0] and mouseX < text_section[0] + text_section[2] and mouseY > text_section[1] and mouseY < text_section[1] + text_section[3]
     
-def navMOB():
-    global button_nav_home, button_nav_post, button_nav_profile, button_logout
+def nav_MOB():
+    global button_nav_home, button_nav_post, button_nav_profile, button_nav_logout
     button_nav_home[4] = mouseX > button_nav_home[0] and mouseX < button_nav_home[0] + button_nav_home[2] and mouseY > button_nav_home[1] and mouseY < button_nav_home[1] + button_nav_home[3]
     button_nav_post[4] = mouseX > button_nav_post[0] and mouseX < button_nav_post[0] + button_nav_post[2] and mouseY > button_nav_post[1] and mouseY < button_nav_post[1] + button_nav_post[3]
     button_nav_profile[4] = mouseX > button_nav_profile[0] and mouseX < button_nav_profile[0] + button_nav_profile[2] and mouseY > button_nav_profile[1] and mouseY < button_nav_profile[1] + button_nav_profile[3]
-    button_nav_logout[4] = mouseX > button_logout[0] and mouseX < button_logout[0] + button_logout[2] and mouseY > button_logout[1] and mouseY < button_logout[1] + button_logout[3]
+    button_nav_logout[4] = mouseX > button_nav_logout[0] and mouseX < button_nav_logout[0] + button_nav_logout[2] and mouseY > button_nav_logout[1] and mouseY < button_nav_logout[1] + button_nav_logout[3]
     
-def bioMOB():
+def bio_MOB():
     global button_edit_bio, button_submit_bio
     button_edit_bio[4] = mouseX > button_edit_bio[0] and mouseX < button_edit_bio[0] + button_edit_bio[2] and mouseY > button_edit_bio[1] and mouseY < button_edit_bio[1] + button_edit_bio[3]
     button_submit_bio[4] = mouseX > button_submit_bio[0] and mouseX < button_submit_bio[0] + button_submit_bio[2] and mouseY > button_submit_bio[1] and mouseY < button_submit_bio[1] + button_submit_bio[3]
 
-def bioUI():
+
+
+def profile_ui():
     
     # draw profile page
     fill(30)
@@ -148,11 +149,11 @@ def bioUI():
     image(profile_icon, 50, 720 - 50, 50, 50)
     
     #logout button
-    if button_logout[4]:
+    if button_nav_logout[4]:
         fill(50)
     else:
         fill(30)    
-    rect(button_logout[0], button_logout[1], button_logout[2], button_logout[3])
+    rect(button_nav_logout[0], button_nav_logout[1], button_nav_logout[2], button_nav_logout[3])
     fill(255)
     textAlign(LEFT, CENTER)
     textSize(32)
@@ -185,10 +186,10 @@ def bioUI():
         fill(0)
         text("Submit", 555, 115)
         
-    bioMOB()
-    navMOB()
+    bio_MOB()
+    nav_MOB()
         
-def postUI():
+def post_ui():
     global temp_txt, title_txt, tx, ty
     rectMode(CORNER)
     # if text_section or title_section:
@@ -237,7 +238,7 @@ def postUI():
     text("Post", 1217, 167)
     textAlign(CORNER, CENTER)
 
-def userUI():
+def user_ui():
     global username
     background(240)
     
