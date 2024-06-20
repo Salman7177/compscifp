@@ -8,12 +8,12 @@ from scrollbar import Scrollbar
 # user variables
 username = ""
 password = ""
-userBoxSelected = False
-passBoxSelected = False
-userLoggedIn = False
+user_box_selected = False
+pass_box_selected = False
+user_logged_in = False
 banned_keys = [" ", ",", ".", ENTER]
-usernameError = False
-passwordError = False
+username_error = False
+password_error = False
 
 # post variables
 users = ["Salman", "Damien", "David", "Shaheer"]
@@ -49,9 +49,9 @@ button_submit_bio = [550, 100, 130, 30, False]
 bio = ""
 edit_bio = False
 
-showHomeScreen = False
-showProfileScreen = False
-showUserScreen = True
+show_home_screen = False
+show_profile_screen = False
+show_user_screen = True
 showPostScreen = False
 showAllPosts = False
 
@@ -68,10 +68,10 @@ def setup():
 def draw():
     background(240)
     
-    if showUserScreen:
+    if show_user_screen:
         userUI()
     
-    elif showProfileScreen:
+    elif show_profile_screen:
         background(255)
         draw_posts()
         bioUI()
@@ -255,21 +255,21 @@ def userUI():
     rect(600, 295, 200, 30)
     fill(0)
     
-    if usernameError:
+    if username_error:
         fill(255, 0, 0)
         textSize(15)
         text("Username must be between 1-8 characters!", 500, 325)
         fill(0)
         textSize(20)
     
-    if passwordError:
+    if password_error:
         fill(255, 0, 0)
         textSize(15)
         text("Password must be between 5-10 characters!", 500, 425)
         fill(0)
         textSize(20)
     
-    if userBoxSelected:
+    if user_box_selected:
         stroke(0, 0, 255)
         strokeWeight(3)
         fill(255)
@@ -284,7 +284,7 @@ def userUI():
     fill(255)
     rect(600, 395, 200, 30)
     
-    if passBoxSelected:
+    if pass_box_selected:
         stroke(0, 0, 255)
         strokeWeight(3)
         fill(255)
@@ -306,18 +306,18 @@ def userUI():
 
     rectMode(CORNER)
 def userTypingFunction():
-    global username, password, userLoggedIn, usernameError, passwordError, showProfileScreen, showUserScreen
+    global username, password, user_logged_in, username_error, password_error, show_profile_screen, show_user_screen
 
     if keyCode == SHIFT:
         pass
-    elif key == BACKSPACE and userBoxSelected:
+    elif key == BACKSPACE and user_box_selected:
         username = username[:-1]
-    elif key == BACKSPACE and passBoxSelected:
+    elif key == BACKSPACE and pass_box_selected:
         password = password[:-1]
-    elif userBoxSelected and len(username) < 18:
+    elif user_box_selected and len(username) < 18:
         if key not in banned_keys:
             username += key
-    elif passBoxSelected and len(password) < 10:
+    elif pass_box_selected and len(password) < 10:
         if key not in banned_keys:
             password += key
         
@@ -327,11 +327,11 @@ def userTypingFunction():
     #         new_psswd += str(ord(i))
     #     userInfo = UserObject(username, password)
     #     userInfo.convert_to_json(new_psswd)
-    #     userLoggedIn = True
-    #     showProfileScreen = True
-    #     showUserScreen = False
+    #     user_logged_in = True
+    #     show_profile_screen = True
+    #     show_user_screen = False
     #     import_posts(False)
-    #     print(showUserScreen)
+    #     print(show_user_screen)
 
     if key == ENTER and (len(username) > 0 and len(password) > 5):        
         new_psswd = [ord(c) for c in password]
@@ -352,35 +352,35 @@ def userTypingFunction():
                     print('found EXACT username and password match')
                     
                 elif a['username'] == username:
-                    usernameError = 'Username already exists or you entered the wrong password!'
+                    username_error = 'Username already exists or you entered the wrong password!'
         
         
         userInfo = UserObject(username, password)
         userInfo.convert_to_json(json_psswd)
-        userLoggedIn = True
-        showProfileScreen = True
-        showUserScreen = False
+        user_logged_in = True
+        show_profile_screen = True
+        show_user_screen = False
         import_posts(False)
 
     elif key == ENTER and len(username) <= 0:
-        usernameError = True
+        username_error = True
         print("Username must be between 1-8 characters!")
     elif key == ENTER and len(password) <= 5:
-        passwordError = True
+        password_error = True
         print("Password must be between 5-10 characters!")
 
 
 
 
 def userMouseFunction():
-    global userBoxSelected, passBoxSelected
+    global user_box_selected, pass_box_selected
     if dist(mouseX, mouseY, 600, 295) <= 100:
-        passBoxSelected = False
-        userBoxSelected = True
+        pass_box_selected = False
+        user_box_selected = True
     
     elif dist(mouseX, mouseY, 600, 395) <= 100:
-        userBoxSelected = False
-        passBoxSelected = True  
+        user_box_selected = False
+        pass_box_selected = True  
         
 def postMouseFunction():
     global hold_txt, post_txt, temp_txt, title_txt, typing_title, ty, new_post
@@ -495,23 +495,23 @@ def draw_posts():
 
 def page_state():
     if mouseButton == LEFT and button_nav_home[4]:
-        showHomeScreen = True
+        show_home_screen = True
         import_posts(False)
 
 def keyPressed():
-    if showUserScreen:
+    if show_user_screen:
         userTypingFunction()
     elif showPostScreen:
         postTypingFunction()
-    elif showProfileScreen:
+    elif show_profile_screen:
         bioTypingFunction()
         
 def mousePressed():
-    if showUserScreen:
+    if show_user_screen:
         userMouseFunction()
     elif showPostScreen:
         postMouseFunction()
-    elif showProfileScreen:
+    elif show_profile_screen:
         bioMouseFunction()
         
 # mousewheel scrolling script, if we ever do multiple scrollbars make sure that the user is selected or hovering over the element they want to scroll over.    
